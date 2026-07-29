@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---- Surfaces ---------------------------------------------------- */
+  --color-ink: #08090b;
+  --color-panel: #0c0e11;
+  --color-raised: #101216;
+  --color-field: #14171c;
+  --color-plate: #edebe6;
+
+  /* ---- Hairlines --------------------------------------------------- */
+  --color-line-soft: rgb(255 255 255 / 0.07);
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.12);
+
+  /* ---- Text -------------------------------------------------------- */
+  --color-fg: #e9e9ec;
+  --color-muted: #a6a8b1;
+  --color-dim: #8a8c95;
+  --color-faint: #6b6d76;
+
+  /* ---- Accent ------------------------------------------------------ */
+  --color-accent: #6e5bf5;
+  --color-accent-hover: #7f6dff;
+  --color-accent-tint: #a99bff;
+  --color-accent-bright: #c9c0ff;
+  /* Alias kept so markup ported from the Vite app keeps working. */
+  --color-primary: #6e5bf5;
+
+  /* ---- Status ------------------------------------------------------ */
+  --color-success: #5bd6a6;
+  --color-gold: #e8b872;
+  --color-danger: #e1685f;
+
+  /* ---- Radii ------------------------------------------------------- */
+  --radius-control: 10px;
+  --radius-btn: 12px;
+  --radius-card: 18px;
+  --radius-panel: 22px;
+  --radius-hero: 28px;
+
+  /* ---- Type -------------------------------------------------------- */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  /* Alias kept so `font-dmsans` from the Vite app keeps working. */
+  --font-dmsans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Motion ------------------------------------------------------ */
+  --animate-fade-up: ufaFadeUp 0.45s ease both;
+  --animate-soft-pulse: ufaPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ufaFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ufaPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  ::placeholder {
+    color: var(--color-faint);
+  }
+
+  ::selection {
+    background: rgb(110 91 245 / 0.35);
+    color: #fff;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+
+  /* Native form controls sit on dark surfaces throughout. */
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="range"] {
+    accent-color: var(--color-accent);
+  }
+
+  /* Scroll lock used by the support widget and modals. */
+  body.modal-open {
+    overflow: hidden;
+  }
+
+  /* react-datepicker ships a light theme; repaint it for the dark canvas. */
+  .react-datepicker {
+    background: var(--color-raised) !important;
+    border-color: var(--color-line-strong) !important;
+    color: var(--color-fg) !important;
+    font-family: var(--font-sans) !important;
+  }
+  .react-datepicker__header {
+    background: var(--color-field) !important;
+    border-bottom-color: var(--color-line) !important;
+  }
+  .react-datepicker__current-month,
+  .react-datepicker__day-name,
+  .react-datepicker__day {
+    color: var(--color-fg) !important;
+  }
+  .react-datepicker__day:hover {
+    background: rgb(110 91 245 / 0.25) !important;
+  }
+  .react-datepicker__day--selected,
+  .react-datepicker__day--keyboard-selected {
+    background: var(--color-accent) !important;
+    color: #fff !important;
+  }
+  .react-datepicker__day--disabled {
+    color: var(--color-faint) !important;
+  }
+  .react-datepicker__triangle {
+    display: none !important;
+  }
+}
+
+@layer utilities {
+  /* The design's signature 1px divider grid: children sit on a tinted
+     background and the gap itself reads as the hairline. */
+  .hairline-grid {
+    gap: 1px;
+    background: var(--color-line-soft);
+  }
+
+  /* Thin dark scrollbars for panels that scroll internally. */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.16) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.16);
+    border-radius: 999px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
