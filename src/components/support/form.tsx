@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { IUser, IGuestUser } from "@/types/user";
 import { Button, Field, Input } from "@/components/ui";
 
@@ -11,6 +12,7 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ setScreen, loginGuest }) => {
+  const t = useTranslations("support.form");
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,15 +28,12 @@ const Form: React.FC<FormProps> = ({ setScreen, loginGuest }) => {
       setFormError({ fullName: "", email: "", error: "" });
 
       if (fullName === "") {
-        setFormError((prev) => ({
-          ...prev,
-          fullName: "Please enter your full name",
-        }));
+        setFormError((prev) => ({ ...prev, fullName: t("errors.fullName") }));
         setLoading(false);
         return;
       }
       if (email === "") {
-        setFormError((prev) => ({ ...prev, email: "Please enter your email" }));
+        setFormError((prev) => ({ ...prev, email: t("errors.email") }));
         setLoading(false);
         return;
       }
@@ -51,22 +50,21 @@ const Form: React.FC<FormProps> = ({ setScreen, loginGuest }) => {
   return (
     <div className="flex-1 overflow-y-auto p-5 scrollbar-slim">
       <p className="m-0 mb-5 text-[13px] leading-relaxed text-dim">
-        Tell us who you are and we&apos;ll pick up the conversation from any
-        device.
+        {t("intro")}
       </p>
 
       <div className="space-y-4">
-        <Field label="Full name" error={formError.fullName}>
+        <Field label={t("fullName")} error={formError.fullName}>
           <Input
             name="fullName"
             type="text"
-            placeholder="Ada Okonkwo"
+            placeholder={t("fullNamePlaceholder")}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
         </Field>
 
-        <Field label="Email address" error={formError.email}>
+        <Field label={t("email")} error={formError.email}>
           <Input
             name="email"
             type="email"
@@ -81,7 +79,7 @@ const Form: React.FC<FormProps> = ({ setScreen, loginGuest }) => {
           disabled={!email || !fullName || loading}
           onClick={handleContinue}
         >
-          {loading ? "Starting…" : "Continue"}
+          {loading ? t("starting") : t("continue")}
         </Button>
 
         {formError.error && (

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { IoMenuOutline, IoClose } from "react-icons/io5";
 import {
   HiOutlineUser,
@@ -15,19 +16,20 @@ import IMAGES from "@/lib/images";
 import { useUser } from "@/context/user";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui";
+import LanguageSwitcher from "./languageSwitcher";
 
 const navLinks = [
-  { path: "/", label: "Book" },
-  { path: "/tracking", label: "Track flight" },
-  { path: "/dashboard/bookings", label: "My trips" },
-  { path: "/contact", label: "Help" },
-];
+  { path: "/", key: "book" },
+  { path: "/tracking", key: "trackFlight" },
+  { path: "/dashboard/bookings", key: "myTrips" },
+  { path: "/contact", key: "help" },
+] as const;
 
 const accountLinks = [
-  { name: "Profile", icon: HiOutlineUser, path: "/dashboard/profile" },
-  { name: "Bookings", icon: HiOutlineTicket, path: "/dashboard/bookings" },
-  { name: "Track", icon: HiOutlineLocationMarker, path: "/tracking" },
-];
+  { key: "profile", icon: HiOutlineUser, path: "/dashboard/profile" },
+  { key: "bookings", icon: HiOutlineTicket, path: "/dashboard/bookings" },
+  { key: "track", icon: HiOutlineLocationMarker, path: "/tracking" },
+] as const;
 
 const initials = (name?: string) =>
   (name || "")
@@ -38,6 +40,7 @@ const initials = (name?: string) =>
     .join("") || "UF";
 
 export default function Navbar({ compact }: { compact?: boolean }) {
+  const t = useTranslations("nav");
   const router = useRouter();
   const pathname = usePathname();
   const { user, logout } = useUser();
@@ -71,7 +74,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
       </Link>
 
       <div className="hidden items-center gap-7 text-sm font-medium lg:flex">
-        {navLinks.map(({ path, label }) => {
+        {navLinks.map(({ path, key }) => {
           const active =
             path === "/" ? pathname === "/" : !!pathname?.startsWith(path);
           return (
@@ -83,17 +86,17 @@ export default function Navbar({ compact }: { compact?: boolean }) {
                 active ? "text-white" : "text-dim"
               )}
             >
-              {label}
+              {t(key)}
             </Link>
           );
         })}
       </div>
 
-      <div className="ml-auto flex items-center gap-3">
+      <div className="ms-auto flex items-center gap-3">
         <div className="hidden items-center gap-2 rounded-full border border-line-strong px-3.5 py-2 text-[13px] text-dim xl:flex">
           <span className="font-mono text-[11px] tracking-[0.1em]">USD</span>
           <span className="h-3 w-px bg-white/15" />
-          <span>EN</span>
+          <LanguageSwitcher />
         </div>
 
         {user ? (
@@ -101,7 +104,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
             <button
               onClick={() => setOpenMenu(!openMenu)}
               className="flex cursor-pointer items-center gap-3"
-              aria-label="Account menu"
+              aria-label={t("accountMenu")}
             >
               <span className="hidden text-[13px] text-dim md:inline">
                 {user.fullName}
@@ -117,7 +120,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
                   className="fixed inset-0 z-40"
                   onClick={() => setOpenMenu(false)}
                 />
-                <div className="absolute top-full right-0 z-50 mt-2 w-52 rounded-card border border-line bg-raised p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.9)]">
+                <div className="absolute top-full end-0 z-50 mt-2 w-52 rounded-card border border-line bg-raised p-2 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.9)]">
                   {accountLinks.map((link) => (
                     <Link
                       key={link.path}
@@ -126,7 +129,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
                       className="flex items-center gap-3 rounded-control px-3 py-2.5 text-sm text-muted transition-colors hover:bg-accent/10 hover:text-accent-bright"
                     >
                       <link.icon size={18} />
-                      <span>{link.name}</span>
+                      <span>{t(link.key)}</span>
                     </Link>
                   ))}
                   <button
@@ -138,7 +141,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
                     className="mt-1 flex w-full cursor-pointer items-center gap-3 rounded-control px-3 py-2.5 text-sm text-danger transition-colors hover:bg-danger/10"
                   >
                     <HiOutlineLogout size={18} />
-                    <span>Sign out</span>
+                    <span>{t("signOut")}</span>
                   </button>
                 </div>
               </>
@@ -152,10 +155,10 @@ export default function Navbar({ compact }: { compact?: boolean }) {
               pill
               onClick={() => router.push("/login")}
             >
-              Sign in
+              {t("signIn")}
             </Button>
             <Button size="sm" pill onClick={() => router.push("/signup")}>
-              Join MileClub
+              {t("joinMileClub")}
             </Button>
           </div>
         )}
@@ -163,24 +166,31 @@ export default function Navbar({ compact }: { compact?: boolean }) {
         <button
           className="cursor-pointer text-3xl text-fg lg:hidden"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label="Menu"
+          aria-label={t("menu")}
         >
           {isOpen ? <IoClose /> : <IoMenuOutline />}
         </button>
       </div>
 
       {isOpen && (
-        <div className="absolute top-full right-4 left-4 z-50 rounded-card border border-line bg-raised p-3 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.9)] lg:hidden">
-          {navLinks.map(({ path, label }) => (
+        <div className="absolute inset-x-4 top-full z-50 rounded-card border border-line bg-raised p-3 shadow-[0_30px_60px_-24px_rgba(0,0,0,0.9)] lg:hidden">
+          {navLinks.map(({ path, key }) => (
             <Link
               key={path}
               href={path}
               onClick={() => setIsOpen(false)}
               className="block rounded-control px-3 py-2.5 text-sm text-muted transition-colors hover:bg-accent/10 hover:text-accent-bright"
             >
-              {label}
+              {t(key)}
             </Link>
           ))}
+
+          {/* The navbar's language pill is hidden below xl, so the mobile menu
+              carries its own switcher. */}
+          <div className="mt-2 border-t border-line-soft pt-3">
+            <LanguageSwitcher variant="block" />
+          </div>
+
           {!user && (
             <div className="mt-2 flex gap-2 border-t border-line-soft pt-3 sm:hidden">
               <Button
@@ -190,7 +200,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
                 className="flex-1"
                 onClick={() => router.push("/login")}
               >
-                Sign in
+                {t("signIn")}
               </Button>
               <Button
                 size="sm"
@@ -198,7 +208,7 @@ export default function Navbar({ compact }: { compact?: boolean }) {
                 className="flex-1"
                 onClick={() => router.push("/signup")}
               >
-                Join
+                {t("join")}
               </Button>
             </div>
           )}

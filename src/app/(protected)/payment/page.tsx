@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { CiBank, CiPhone } from "react-icons/ci";
 import { FaCreditCard } from "react-icons/fa6";
 import { MdCurrencyBitcoin } from "react-icons/md";
@@ -24,42 +25,16 @@ type Sheet = "mobile" | "bank" | "card" | "crypto" | "cashapp" | null;
 const methods: {
   key: Exclude<Sheet, null>;
   icon: React.ElementType;
-  title: string;
-  copy: string;
 }[] = [
-  {
-    key: "mobile",
-    icon: CiPhone,
-    title: "Mobile transfer",
-    copy: "Securely transfer funds directly from your mobile bank account.",
-  },
-  {
-    key: "bank",
-    icon: CiBank,
-    title: "Bank transfer",
-    copy: "Securely transfer funds directly from your bank account.",
-  },
-  {
-    key: "card",
-    icon: FaCreditCard,
-    title: "Credit / debit card",
-    copy: "Pay instantly using Visa, Mastercard or Verve.",
-  },
-  {
-    key: "crypto",
-    icon: MdCurrencyBitcoin,
-    title: "Cryptocurrency",
-    copy: "Pay using Bitcoin, Ethereum or other cryptocurrencies.",
-  },
-  {
-    key: "cashapp",
-    icon: SiCashapp,
-    title: "Cash App",
-    copy: "Send the amount due to our Cash App tag.",
-  },
+  { key: "mobile", icon: CiPhone },
+  { key: "bank", icon: CiBank },
+  { key: "card", icon: FaCreditCard },
+  { key: "crypto", icon: MdCurrencyBitcoin },
+  { key: "cashapp", icon: SiCashapp },
 ];
 
 export default function Payment() {
+  const t = useTranslations("payment");
   const { getFlight, formData } = useFlight();
   const [flight, setFlight] = useState<IFlight | null>(null);
   const [loading, setLoading] = useState(true);
@@ -96,7 +71,12 @@ export default function Payment() {
     <div className="mx-auto w-full max-w-[1440px]">
       <Navbar compact />
       <Stepper
-        steps={["Search", "Passengers & seats", "Payment", "Ticket issued"]}
+        steps={[
+          t("steps.search"),
+          t("steps.passengers"),
+          t("steps.payment"),
+          t("steps.issued"),
+        ]}
         current={3}
       />
 
@@ -113,15 +93,18 @@ export default function Payment() {
           <main>
             <div className="mb-2 flex items-center gap-2 text-xs text-success">
               <StatusDot tone="success" />
-              Secure checkout · PCI DSS
+              {t("secureCheckout")}
             </div>
             <h1 className="m-0 mb-2 text-3xl font-semibold tracking-[-0.035em] md:text-[40px]">
-              How would you like to pay?
+              {t("title")}
             </h1>
             <p className="m-0 mb-7 text-sm text-dim">
               {formData.seats.length > 0
-                ? `Seats ${formData.seats.join(", ")} held for you`
-                : "Your seats are held while you pay"}
+                ? t("seatsHeldFor", {
+                    count: formData.seats.length,
+                    seats: formData.seats.join(", "),
+                  })
+                : t("seatsHeld")}
             </p>
 
             <div className="flex flex-col gap-2.5">
@@ -135,25 +118,23 @@ export default function Payment() {
                   </span>
                   <div className="flex-1">
                     <div className="font-display text-[17px] font-semibold">
-                      {method.title}
+                      {t("methods." + method.key + ".title")}
                     </div>
                     <div className="mt-1 text-[13px] text-dim">
-                      {method.copy}
+                      {t("methods." + method.key + ".copy")}
                     </div>
                   </div>
                   <Button
                     className="shrink-0"
                     onClick={() => setSheet(method.key)}
                   >
-                    Proceed
+                    {t("proceed")}
                   </Button>
                 </div>
               ))}
             </div>
 
-            <Eyebrow className="mt-6">
-              You will not be charged until you confirm
-            </Eyebrow>
+            <Eyebrow className="mt-6">{t("noChargeNotice")}</Eyebrow>
           </main>
 
           <FareSummary flight={flight} />

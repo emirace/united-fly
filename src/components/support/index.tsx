@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import { CgChevronDown, CgChevronLeft } from "react-icons/cg";
+import { useTranslations } from "next-intl";
 import { useToastNotification } from "@/context/toastNotification";
 import { useUser } from "@/context/user";
 import { useMessage } from "@/context/message";
@@ -16,6 +17,7 @@ import Form from "./form";
 const articles: { _id: string; topic: string }[] = [];
 
 export default function Support() {
+  const t = useTranslations("support");
   const { user: defaultUser } = useUser();
   const { setChatActive } = useMessage();
   const { addNotification } = useToastNotification();
@@ -89,10 +91,7 @@ export default function Support() {
 
   const handleToggle = () => {
     if (defaultUser && defaultUser.role === "Admin") {
-      addNotification({
-        message: "Admins answer support from the dashboard inbox.",
-        error: true,
-      });
+      addNotification({ message: t("adminNotice"), error: true });
       return;
     }
     setShowSupport(!showSupport);
@@ -102,8 +101,8 @@ export default function Support() {
     <div
       className={`fixed z-60 ${
         showSupport
-          ? "inset-0 md:top-auto md:right-7 md:bottom-7 md:left-auto"
-          : "right-6 bottom-6"
+          ? "inset-0 md:top-auto md:end-7 md:bottom-7 md:start-auto"
+          : "end-6 bottom-6"
       }`}
     >
       {showSupport && (
@@ -113,7 +112,7 @@ export default function Support() {
               <button
                 onClick={() => setScreen("home")}
                 className="cursor-pointer text-2xl text-dim transition-colors hover:text-fg"
-                aria-label="Back"
+                aria-label={t("back")}
               >
                 <CgChevronLeft />
               </button>
@@ -124,18 +123,18 @@ export default function Support() {
             <div className="min-w-0">
               <div className="font-display text-sm font-semibold">
                 {screen === "home"
-                  ? `Hello ${user ? user.fullName : "there"}`
-                  : "Support"}
+                  ? t("greeting", { name: user ? user.fullName : t("there") })
+                  : t("title")}
               </div>
               <div className="mt-0.5 text-[11px] text-faint">
-                Replies in ~4 min
+                {t("replyTime")}
               </div>
             </div>
 
             <button
               onClick={handleToggle}
-              className="ml-auto cursor-pointer text-2xl text-dim transition-colors hover:text-fg"
-              aria-label="Close support"
+              className="ms-auto cursor-pointer text-2xl text-dim transition-colors hover:text-fg"
+              aria-label={t("close")}
             >
               <CgChevronDown />
             </button>
@@ -149,7 +148,7 @@ export default function Support() {
         <button
           onClick={handleToggle}
           className="flex size-13 cursor-pointer items-center justify-center rounded-full bg-accent text-white shadow-[0_16px_36px_-12px_rgba(110,91,245,0.9)] transition-colors hover:bg-accent-hover"
-          aria-label="Open support"
+          aria-label={t("open")}
         >
           <RiCustomerService2Fill className="text-2xl" />
         </button>

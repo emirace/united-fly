@@ -1,0 +1,660 @@
+{
+  "common": {
+    "changeLanguage": "Changer de langue",
+    "cabins": {
+      "economy": "Économique",
+      "premiumEconomy": "Économique Premium",
+      "business": "Affaires",
+      "firstClass": "Première classe"
+    },
+    "close": "Fermer"
+  },
+  "nav": {
+    "book": "Réserver",
+    "trackFlight": "Suivre un vol",
+    "myTrips": "Mes voyages",
+    "help": "Aide",
+    "profile": "Profil",
+    "bookings": "Réservations",
+    "track": "Suivi",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "joinMileClub": "Rejoindre MileClub",
+    "join": "Rejoindre",
+    "menu": "Menu",
+    "accountMenu": "Menu du compte"
+  },
+  "footer": {
+    "blurb": "Voyagiste accrédité IATA. Les tarifs affichés incluent les taxes et les frais de transporteur.",
+    "language": "Langue",
+    "copyright": "© {year} United Fly Airlines. Tous droits réservés.",
+    "book": {
+      "title": "Réserver",
+      "flightSearch": "Recherche de vols",
+      "popularRoutes": "Itinéraires populaires",
+      "groupBookings": "Réservations de groupe",
+      "routeMap": "Carte du réseau"
+    },
+    "manage": {
+      "title": "Gérer",
+      "trackBooking": "Suivre une réservation",
+      "myTrips": "Mes voyages",
+      "payments": "Paiements",
+      "profile": "Profil"
+    },
+    "company": {
+      "title": "Entreprise",
+      "about": "À propos",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions générales",
+      "contact": "Contact"
+    }
+  },
+  "search": {
+    "oneWay": "Aller simple",
+    "roundTrip": "Aller-retour",
+    "from": "Départ",
+    "to": "Arrivée",
+    "depart": "Aller",
+    "return": "Retour",
+    "travellers": "Voyageurs",
+    "selectOrigin": "Choisir le départ",
+    "selectDestination": "Choisir la destination",
+    "selectDate": "Choisir une date",
+    "selectClass": "Choisir une classe",
+    "submit": "Rechercher des vols →",
+    "included": "Inclus",
+    "travellerCount": "{count, plural, one {# voyageur} other {# voyageurs}}",
+    "perks": {
+      "hold": "Option 24 h gratuite",
+      "taxes": "Taxes comprises",
+      "noCard": "Sans carte bancaire"
+    },
+    "errors": {
+      "origin": "Veuillez choisir un lieu de départ.",
+      "destination": "Veuillez choisir une destination.",
+      "date": "Veuillez choisir une date de départ.",
+      "cabin": "Veuillez choisir une classe de voyage.",
+      "travellers": "Veuillez indiquer le nombre de voyageurs."
+    }
+  },
+  "home": {
+    "hero": {
+      "onTime": "Ponctualité 94,2 % · Juin 2026",
+      "subtitle": "630 destinations, un seul écran de tarifs, aucun supplément caché. Consultez les disponibilités en direct et bloquez votre siège pendant 24 heures — gratuitement.",
+      "title": "Prêts quand vous l'êtes."
+    },
+    "stats": {
+      "destinations": "Destinations desservies",
+      "hold": "Siège bloqué 24 h, sans carte",
+      "accredited": "Accrédité et cautionné",
+      "reviews": "18 402 avis vérifiés"
+    },
+    "popular": {
+      "eyebrow": "Où l'on part en ce moment",
+      "title": "Populaire cette saison",
+      "all": "Les 630 destinations",
+      "from": "à partir de",
+      "fillingFast": "Bientôt complet"
+    },
+    "destinations": {
+      "thailand": {
+        "name": "Thaïlande",
+        "info": "Prochain départ le 26 déc. · 2 escales"
+      },
+      "hongKong": {
+        "name": "Hong Kong",
+        "info": "Vol quotidien · 1 escale"
+      },
+      "maldives": {
+        "name": "Maldives",
+        "info": "2 vols par semaine · 1 escale"
+      },
+      "switzerland": {
+        "name": "Suisse",
+        "info": "Prochaine disponibilité le 2 oct. · direct"
+      }
+    },
+    "steps": {
+      "eyebrow": "Trois étapes",
+      "title": "Réservé en moins de deux minutes",
+      "copy": "Aucun compte n'est requis pour chercher. Créez-en un au moment du paiement et retrouvez votre réservation, votre carte d'embarquement et vos remboursements au même endroit.",
+      "cta": "Lancer une recherche",
+      "search": {
+        "title": "Consultez les tarifs en direct",
+        "copy": "Des sièges réellement disponibles sur 630 destinations — sans prix d'appel."
+      },
+      "seat": {
+        "title": "Choisissez siège et tarif",
+        "copy": "Comparez les cabines côte à côte et choisissez votre siège sur le plan."
+      },
+      "pay": {
+        "title": "Payez comme vous voulez",
+        "copy": "Carte, virement bancaire, mobile money ou crypto — billet émis instantanément."
+      }
+    },
+    "cta": {
+      "title": "Il est temps de découvrir",
+      "copy": "Rejoignez MileClub et gagnez 2× plus de miles sur chaque trajet ce trimestre. Modifications gratuites, choix du siège offert et assistance prioritaire quand vos plans changent.",
+      "join": "Rejoindre MileClub",
+      "book": "Réserver un vol"
+    }
+  },
+  "listing": {
+    "steps": {
+      "search": "Recherche",
+      "review": "Vérification",
+      "passengers": "Passagers",
+      "payment": "Paiement"
+    },
+    "sort": {
+      "best": "Meilleur",
+      "cheapest": "Moins cher",
+      "fastest": "Plus rapide"
+    },
+    "bestValue": "Meilleur rapport",
+    "terminal": "Terminal {number}",
+    "direct": "direct",
+    "cabinBag": "Bagage cabine inclus",
+    "perAdult": "par adulte, tout compris",
+    "selectFlight": "Choisir ce vol",
+    "seatsLeft": "{count, plural, one {Il ne reste que # siège à ce tarif} other {Il ne reste que # sièges à ce tarif}}",
+    "refundable": "Remboursable · pénalité après 24 h",
+    "anyDate": "Toutes dates",
+    "adultCount": "{count, plural, one {# adulte} other {# adultes}}",
+    "close": "Fermer",
+    "edit": "Modifier",
+    "updateSearch": "Mettre à jour la recherche →",
+    "flightsAvailable": "{count, plural, one {# vol disponible} other {# vols disponibles}}",
+    "allDates": "Toutes les dates",
+    "pricesInclude": "prix incluant taxes et frais",
+    "empty": {
+      "title": "Aucun résultat",
+      "copy": "Aucun vol ne correspond à cet itinéraire et à cette date. Essayez de modifier votre recherche."
+    }
+  },
+  "booking": {
+    "steps": {
+      "search": "Recherche",
+      "passengers": "Passagers et sièges",
+      "payment": "Paiement",
+      "issued": "Billet émis"
+    },
+    "itinerary": "Itinéraire · {flight}",
+    "seatsAvailable": "{count, plural, one {# siège disponible} other {# sièges disponibles}}",
+    "flightIncludes": "Vol {flight} · repas et bagage de 23 kg inclus",
+    "travellerDetails": "Détails du voyageur",
+    "new": "Nouveau",
+    "nameNotice": "Saisissez chaque nom exactement tel qu'il figure sur le passeport.",
+    "sendTo": "Les détails de la réservation seront envoyés à",
+    "mobile": "Numéro de mobile",
+    "email": "Adresse e-mail",
+    "beforeContinue": "Avant de continuer",
+    "important": {
+      "names": "Les noms doivent correspondre exactement à votre passeport — toute modification après émission coûte 60 $.",
+      "entry": "Les conditions d'entrée dépendent de votre destination ; vérifiez les règles de visa avant de partir.",
+      "cancellation": "Annulation gratuite dans les 24 heures suivant la réservation, puis des pénalités s'appliquent.",
+      "baggage": "Un bagage en soute de 23 kg et un bagage cabine de 7 kg sont inclus dans ce tarif."
+    },
+    "fare": {
+      "title": "Récapitulatif du tarif",
+      "baseFare": "Tarif de base × {count}",
+      "taxes": "Taxes et frais de transporteur",
+      "seat": "Choix du siège",
+      "bag": "Bagage en soute 23 kg",
+      "included": "Inclus",
+      "total": "Total à payer"
+    },
+    "continueToSeats": "Continuer vers les sièges",
+    "noChargeYet": "Vous ne serez débité qu'à la dernière étape.",
+    "cancellation": {
+      "title": "Annulation",
+      "copy": "Remboursable — la pénalité dépend de la proximité du départ au moment de l'annulation."
+    },
+    "errors": {
+      "email": "Saisissez un e-mail",
+      "phone": "Saisissez un numéro de mobile"
+    },
+    "passenger": {
+      "heading": "Voyageur {number} · adulte",
+      "title": "Civilité",
+      "titles": {
+        "mr": "M.",
+        "mrs": "Mme",
+        "ms": "Mme",
+        "dr": "Dr"
+      },
+      "firstName": "Prénom",
+      "firstNamePlaceholder": "Tel qu'indiqué sur le passeport",
+      "lastName": "Nom",
+      "lastNamePlaceholder": "Nom de famille",
+      "dob": "Date de naissance",
+      "month": "Mois",
+      "months": {
+        "january": "Janvier",
+        "february": "Février",
+        "march": "Mars",
+        "april": "Avril",
+        "may": "Mai",
+        "june": "Juin",
+        "july": "Juillet",
+        "august": "Août",
+        "september": "Septembre",
+        "october": "Octobre",
+        "november": "Novembre",
+        "december": "Décembre"
+      },
+      "nationality": "Nationalité",
+      "passportCountry": "Pays de délivrance du passeport",
+      "passportNumber": "Numéro de passeport",
+      "passportHint": "Saisissez un numéro de passeport valide — cela peut affecter la confirmation de votre réservation.",
+      "passportExpiry": "Expiration du passeport",
+      "searchCountry": "Rechercher un pays",
+      "addTraveller": "+ Ajouter un voyageur"
+    },
+    "seats": {
+      "heading": "Choisissez votre siège",
+      "selected": "Sélectionné",
+      "free": "Libre",
+      "taken": "Occupé",
+      "chosen": "{count, plural, one {Siège {seats}} other {Sièges {seats}}}",
+      "none": "Aucun siège sélectionné",
+      "includedHint": "Inclus dans votre tarif — sans frais de siège.",
+      "pickHint": "Choisissez au moins un siège pour passer au paiement.",
+      "proceed": "Passer au paiement"
+    }
+  },
+  "payment": {
+    "steps": {
+      "search": "Recherche",
+      "passengers": "Passagers et sièges",
+      "payment": "Paiement",
+      "issued": "Billet émis"
+    },
+    "secureCheckout": "Paiement sécurisé · PCI DSS",
+    "title": "Comment souhaitez-vous payer ?",
+    "seatsHeld": "Vos sièges sont bloqués pendant le paiement",
+    "seatsHeldFor": "{count, plural, one {Siège {seats} réservé pour vous} other {Sièges {seats} réservés pour vous}}",
+    "proceed": "Continuer",
+    "noChargeNotice": "Vous ne serez débité qu'après confirmation",
+    "methods": {
+      "mobile": {
+        "title": "Virement mobile",
+        "copy": "Transférez des fonds en toute sécurité depuis votre application bancaire mobile."
+      },
+      "bank": {
+        "title": "Virement bancaire",
+        "copy": "Transférez des fonds en toute sécurité depuis votre compte bancaire."
+      },
+      "card": {
+        "title": "Carte de crédit / débit",
+        "copy": "Payez instantanément avec Visa, Mastercard ou Verve."
+      },
+      "crypto": {
+        "title": "Cryptomonnaie",
+        "copy": "Payez en Bitcoin, Ethereum ou autres cryptomonnaies."
+      },
+      "cashapp": {
+        "title": "Cash App",
+        "copy": "Envoyez le montant dû à notre identifiant Cash App."
+      }
+    },
+    "shared": {
+      "copied": "Copié dans le presse-papiers",
+      "copyFailed": "Copie impossible",
+      "copy": "Copier"
+    },
+    "summary": {
+      "title": "Récapitulatif du tarif",
+      "baseFare": "Tarif de base",
+      "discount": "Remise",
+      "otherServices": "Autres services",
+      "total": "Total à payer",
+      "yourBooking": "Votre réservation",
+      "travellers": "Voyageurs",
+      "adult": "Adulte",
+      "seats": "Sièges {seats}",
+      "reviewBooking": "Vérifier la réservation"
+    },
+    "card": {
+      "unavailable": "Indisponible",
+      "notAvailable": "Le paiement par carte n'est pas disponible pour le moment.",
+      "chooseAnother": "Veuillez choisir un autre moyen de paiement."
+    },
+    "mobile": {
+      "title": "Virement mobile",
+      "copy": "Effectuez un virement vers les coordonnées bancaires indiquées.",
+      "accountNumber": "Numéro de compte",
+      "accountName": "Titulaire du compte",
+      "routing": "Code guichet",
+      "address": "Adresse",
+      "bankName": "Nom de la banque",
+      "refreshIn": "Coordonnées actualisées dans",
+      "confirmWarning": "Ne confirmez que si vous avez effectué le virement",
+      "madePayment": "J'ai effectué le paiement ({amount})",
+      "backToMethods": "Retour aux moyens de paiement",
+      "seatsHeld": "Vos sièges sont bloqués pendant le paiement",
+      "settingsError": "Une erreur est survenue lors du chargement des paramètres."
+    },
+    "bank": {
+      "title": "Virement bancaire",
+      "copy": "Ouvrez le lien de paiement sécurisé ci-dessous pour finaliser votre virement.",
+      "generating": "Génération du lien de paiement",
+      "makePayment": "Effectuer le paiement ({amount})",
+      "paymentLink": "Lien de paiement"
+    },
+    "cashApp": {
+      "title": "Cash App",
+      "copy": "Envoyez le montant dû à l'identifiant ci-dessous.",
+      "amountDue": "Montant dû",
+      "name": "Nom",
+      "cashTag": "Identifiant Cash",
+      "timeLeft": "Temps restant pour payer",
+      "madePayment": "J'ai effectué le paiement ({amount})",
+      "settingsError": "Une erreur est survenue lors du chargement des paramètres."
+    },
+    "crypto": {
+      "title": "Payer en cryptomonnaie",
+      "selectCoin": "Choisir une devise",
+      "selectPlaceholder": "Choisir une cryptomonnaie",
+      "sendWarning": "Envoyez le montant dû à l'adresse ci-dessous. N'envoyez que du {coin} à cette adresse.",
+      "amountDue": "Montant dû",
+      "walletAddress": "Adresse du portefeuille",
+      "network": "Réseau",
+      "timeLeft": "Temps restant pour payer",
+      "madePayment": "J'ai effectué le paiement ({amount})",
+      "settingsError": "Une erreur est survenue lors du chargement des paramètres."
+    },
+    "token": {
+      "route": "Itinéraire",
+      "flight": "Vol",
+      "departs": "Départ",
+      "arrives": "Arrivée",
+      "class": "Classe",
+      "accountNumber": "Numéro de compte",
+      "accountName": "Titulaire du compte",
+      "bankName": "Nom de la banque",
+      "routing": "Code guichet",
+      "address": "Adresse",
+      "receiptUploaded": "Reçu téléversé",
+      "receiptFailed": "Échec du téléversement de l'image"
+    }
+  },
+  "confirm": {
+    "steps": {
+      "search": "Recherche",
+      "passengers": "Passagers et sièges",
+      "payment": "Paiement",
+      "issued": "Billet émis"
+    },
+    "confirming": "Confirmation du paiement",
+    "paymentStatus": "Paiement {status}",
+    "copy": "Votre vol est réservé. Nous vous enverrons un e-mail dès que le paiement sera confirmé.",
+    "rows": {
+      "bookingId": "N° de réservation",
+      "bookedBy": "Réservé par",
+      "paymentMethod": "Moyen de paiement",
+      "totalPrice": "Prix total",
+      "dateBooked": "Date de réservation",
+      "departure": "Départ",
+      "guests": "Voyageurs"
+    },
+    "autoUpdates": "Cette page se met à jour automatiquement",
+    "resolved": "Paiement traité",
+    "goToBookings": "Voir mes réservations"
+  },
+  "tracking": {
+    "title": "Où est mon vol ?",
+    "subtitle": "Saisissez votre numéro de réservation. Aucun compte requis.",
+    "submit": "Suivre la réservation",
+    "searching": "Recherche…",
+    "ref": "Réf. {reference}",
+    "departs": "Départ {time}",
+    "arrives": "Arrivée {time}",
+    "flightNumber": "Vol {flight}",
+    "status": "Statut {status}",
+    "travellers": "Voyageurs",
+    "noTravellers": "Aucun détail de voyageur enregistré",
+    "payment": "Paiement",
+    "booked": "Réservé le {date}",
+    "seats": "Sièges",
+    "noSeats": "Aucun siège attribué",
+    "supportPrompt": "Des questions sur cette réservation ? Notre service client est ouvert 24 h/24 et 7 j/7.",
+    "contactSupport": "Contacter le service client",
+    "errors": {
+      "reference": "Veuillez saisir votre numéro de réservation.",
+      "notFound": "Réservation introuvable !"
+    }
+  },
+  "contact": {
+    "eyebrow": "Assistance · 24 h/24, 7 j/7",
+    "title": "Parlez à une personne, pas à une file d'attente.",
+    "subtitle": "Première réponse en moins de quatre minutes, à toute heure et dans tous les fuseaux horaires.",
+    "imageAlt": "Voyageuse",
+    "sent": "Message envoyé. Nous vous recontacterons rapidement.",
+    "call": {
+      "label": "Appeler",
+      "title": "Parler au comptoir",
+      "copy": "Le plus rapide pour les modifications et annulations du jour."
+    },
+    "email": {
+      "label": "E-mail",
+      "title": "Envoyer les détails",
+      "copy": "Idéal pour les remboursements, les reçus et les justificatifs."
+    },
+    "chat": {
+      "label": "Chat",
+      "title": "Chat en direct et WhatsApp",
+      "copy": "Poursuivez la conversation depuis n'importe quel appareil.",
+      "online": "Conseillers en ligne"
+    },
+    "form": {
+      "title": "Envoyez-nous un message",
+      "name": "Votre nom",
+      "email": "Adresse e-mail",
+      "mobile": "Numéro de mobile",
+      "reference": "Numéro de réservation (facultatif)",
+      "message": "Comment pouvons-nous vous aider ?",
+      "terms": "J'accepte les conditions générales.",
+      "submit": "Envoyer le message",
+      "sending": "Envoi…"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "nameChange": "Puis-je modifier le nom sur un billet ?",
+      "refunds": "Combien de temps prennent les remboursements ?",
+      "baggage": "Quels bagages sont inclus dans mon tarif ?",
+      "visa": "Ai-je besoin d'un visa pour une escale ?",
+      "answer": "Notre service client peut vous répondre directement — appelez, écrivez-nous ou démarrez un chat ci-dessus en indiquant votre numéro de réservation."
+    },
+    "errors": {
+      "required": "Le nom, l'e-mail et le message sont obligatoires.",
+      "terms": "Veuillez accepter les conditions générales."
+    }
+  },
+  "auth": {
+    "shell": {
+      "imageAlt": "Avion",
+      "pitchTitle": "Chaque voyage, carte d'embarquement et reçu au même endroit.",
+      "pitchCopy": "Les membres MileClub bénéficient de 2× plus de miles, du choix du siège offert et d'une assistance prioritaire.",
+      "copyright": "© {year} United Fly Airlines"
+    },
+    "login": {
+      "title": "Bon retour parmi nous",
+      "newHere": "Nouveau ici ?",
+      "createAccount": "Créer un compte",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "rememberMe": "Se souvenir de moi",
+      "submit": "Se connecter",
+      "or": "ou",
+      "trackWithoutSignIn": "Suivre une réservation sans se connecter",
+      "errors": {
+        "email": "L'e-mail est obligatoire",
+        "password": "Le mot de passe est obligatoire"
+      }
+    },
+    "signup": {
+      "title": "Rejoindre MileClub",
+      "alreadyMember": "Déjà membre ?",
+      "signIn": "Se connecter",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Ada Okonkwo",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Au moins 8 caractères",
+      "confirmPassword": "Confirmer le mot de passe",
+      "confirmPasswordPlaceholder": "Répétez votre mot de passe",
+      "submit": "Créer un compte",
+      "errors": {
+        "email": "Une adresse e-mail valide est requise",
+        "password": "Le mot de passe doit contenir au moins 8 caractères",
+        "confirmPassword": "Les mots de passe ne correspondent pas"
+      }
+    }
+  },
+  "support": {
+    "title": "Assistance",
+    "greeting": "Bonjour {name}",
+    "there": "à vous",
+    "replyTime": "Réponse en ~4 min",
+    "open": "Ouvrir l'assistance",
+    "close": "Fermer l'assistance",
+    "back": "Retour",
+    "adminNotice": "Les administrateurs répondent depuis la boîte de réception du tableau de bord.",
+    "faq": {
+      "title": "Questions fréquentes",
+      "searchPlaceholder": "Rechercher une question",
+      "questions": {
+        "nameChange": "Puis-je modifier le nom sur un billet ?",
+        "refunds": "Combien de temps prennent les remboursements ?",
+        "baggage": "Quels bagages sont inclus dans mon tarif ?",
+        "visa": "Ai-je besoin d'un visa pour une escale ?"
+      },
+      "noMatch": "Aucune question correspondante — envoyez-nous plutôt un message.",
+      "startTitle": "Démarrer une conversation",
+      "startCopy": "Nous répondrons dès que possible, généralement sous 2 heures.",
+      "startCta": "Envoyez-nous un message"
+    },
+    "form": {
+      "intro": "Dites-nous qui vous êtes et nous reprendrons la conversation depuis n'importe quel appareil.",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Ada Okonkwo",
+      "email": "Adresse e-mail",
+      "continue": "Continuer",
+      "starting": "Démarrage…",
+      "errors": {
+        "fullName": "Veuillez saisir votre nom complet",
+        "email": "Veuillez saisir votre e-mail"
+      }
+    },
+    "chat": {
+      "empty": "Dites bonjour — un conseiller vous répondra sous peu.",
+      "placeholder": "Écrivez un message…",
+      "send": "Envoyer",
+      "sending": "Envoi",
+      "failed": "Échec",
+      "retry": "Réessayer",
+      "imageUploaded": "Image téléversée",
+      "imageFailed": "Échec du téléversement de l'image"
+    }
+  },
+  "dashboard": {
+    "nav": {
+      "profile": "Profil",
+      "bookings": "Réservations",
+      "payments": "Paiements",
+      "signOut": "Se déconnecter",
+      "menu": "Menu du tableau de bord",
+      "closeMenu": "Fermer le menu"
+    },
+    "bookings": {
+      "title": "Vos réservations",
+      "subtitle": "{total} au total · {shown} {status}",
+      "bookFlight": "Réserver un vol",
+      "tabs": {
+        "pending": "En attente",
+        "confirmed": "À venir",
+        "cancelled": "Annulées",
+        "completed": "Terminées"
+      },
+      "manage": "Gérer la réservation",
+      "departure": "Départ",
+      "arrival": "Arrivée",
+      "seats": "Sièges",
+      "empty": {
+        "title": "Rien ici",
+        "copy": "Aucune réservation {status} disponible."
+      }
+    },
+    "payments": {
+      "title": "Paiements",
+      "subtitle": "Reçus de toutes vos réservations",
+      "searchPlaceholder": "Rechercher par n° de transaction"
+    }
+  },
+  "bookingDetail": {
+    "booking": "Réservation",
+    "status": "Statut",
+    "paymentStatus": "Statut du paiement",
+    "class": "Classe",
+    "created": "Créée le",
+    "flight": "Vol",
+    "flightNumber": "Numéro de vol",
+    "origin": "Départ",
+    "destination": "Destination",
+    "departure": "Départ",
+    "arrival": "Arrivée",
+    "flightStatus": "Statut du vol",
+    "seats": "Sièges",
+    "seatNumbered": "Siège {number}",
+    "noSeats": "Aucun attribué",
+    "receipt": "Reçu de paiement",
+    "travellers": "Voyageurs",
+    "name": "Nom",
+    "dob": "Date de naissance",
+    "nationality": "Nationalité",
+    "passport": "Passeport",
+    "issuingCountry": "Pays de délivrance",
+    "expiry": "Expiration"
+  },
+  "ticket": {
+    "download": "Télécharger le billet",
+    "preparing": "Préparation…",
+    "error": "Impossible de générer votre billet. Veuillez réessayer.",
+    "docType": "Billet électronique",
+    "bookingRef": "Référence de réservation",
+    "flightNumber": "Vol",
+    "cabin": "Cabine",
+    "departure": "Départ",
+    "arrival": "Arrivée",
+    "duration": "Durée",
+    "status": "Statut",
+    "statuses": {
+      "pending": "En attente",
+      "confirmed": "Confirmée",
+      "cancelled": "Annulée",
+      "checkedIn": "Enregistré",
+      "completed": "Terminée"
+    },
+    "passengers": "Passagers",
+    "passengerName": "Passager",
+    "seat": "Siège",
+    "seatsSummary": "Sièges de cette réservation : {seats}",
+    "noSeat": "Aucun passager sur cette réservation.",
+    "totalPaid": "Total payé",
+    "scanAtCheckIn": "À scanner à l'enregistrement",
+    "issued": "Émis le {date}",
+    "notesTitle": "Bagages et enregistrement",
+    "notes": {
+      "checkIn": "L'enregistrement en ligne ouvre 24 heures avant le départ et ferme 90 minutes avant.",
+      "airport": "Présentez-vous 3 heures avant un vol international, 2 heures avant un vol domestique.",
+      "carryOn": "Un bagage cabine jusqu'à 7 kg (55 × 40 × 20 cm) et un accessoire personnel sont inclus.",
+      "checked": "Bagages en soute : 1 × 23 kg en Économique et Économique Premium, 2 × 32 kg en Affaires et Première.",
+      "documents": "Munissez-vous du passeport ou de la pièce d'identité utilisés lors de la réservation. Le nom doit correspondre exactement à ce billet.",
+      "gate": "L'embarquement ferme 20 minutes avant le départ. Les numéros de porte s'affichent sur les écrans de l'aéroport."
+    },
+    "disclaimer": "Ce document confirme votre réservation. Ce n'est pas une carte d'embarquement — celle-ci vous sera remise à l'enregistrement.",
+    "support": "unitedfly.com/support"
+  }
+}

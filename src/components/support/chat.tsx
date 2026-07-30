@@ -2,6 +2,7 @@
 
 import React, { ChangeEvent, useEffect, useState } from "react";
 import moment from "moment";
+import { useTranslations } from "next-intl";
 import { FaPaperPlane } from "react-icons/fa";
 import { GrAttachment } from "react-icons/gr";
 import { IoMdClose } from "react-icons/io";
@@ -20,6 +21,7 @@ interface ChatProps {
 }
 
 const Chat: React.FC<ChatProps> = ({ user }) => {
+  const t = useTranslations("support.chat");
   const {
     loadingMessage,
     messages,
@@ -95,9 +97,9 @@ const Chat: React.FC<ChatProps> = ({ user }) => {
       if (!file) throw Error("No image found");
 
       setImage(await compressImageUpload(file, 1024));
-      addNotification({ message: "Image uploaded" });
+      addNotification({ message: t("imageUploaded") });
     } catch {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({ message: t("imageFailed"), error: true });
     } finally {
       setUploading(false);
     }
@@ -122,19 +124,21 @@ const Chat: React.FC<ChatProps> = ({ user }) => {
                 />
               )}
               {sending.message}
-              <span className="mt-1 block text-right text-[11px]">
+              <span className="mt-1 block text-end text-[11px]">
                 {sending.failed ? (
                   <span className="text-danger">
-                    Failed{" "}
+                    {t("failed")}{" "}
                     <button
                       className="cursor-pointer underline"
                       onClick={handleRetry}
                     >
-                      Retry
+                      {t("retry")}
                     </button>
                   </span>
                 ) : (
-                  <span className="animate-pulse text-faint">Sending</span>
+                  <span className="animate-pulse text-faint">
+                    {t("sending")}
+                  </span>
                 )}
               </span>
             </div>
@@ -145,7 +149,7 @@ const Chat: React.FC<ChatProps> = ({ user }) => {
           <SkeletonMessageLoading />
         ) : messages.length === 0 ? (
           <p className="py-8 text-center text-[13px] text-faint">
-            Say hello — an agent will pick this up shortly.
+            {t("empty")}
           </p>
         ) : (
           messages
@@ -186,7 +190,7 @@ const Chat: React.FC<ChatProps> = ({ user }) => {
                         />
                       )}
                       <div className="break-words">{message.content}</div>
-                      <div className="mt-1 text-right text-[11px] text-faint">
+                      <div className="mt-1 text-end text-[11px] text-faint">
                         {moment(message.createdAt).format("LT")}
                       </div>
                     </div>
@@ -215,8 +219,8 @@ const Chat: React.FC<ChatProps> = ({ user }) => {
         <input
           value={messageInput}
           onChange={(e) => setMessageInput(e.target.value)}
-          className="flex-1 rounded-control border border-line-strong bg-field px-3 py-2.5 text-[13px] text-fg outline-none transition-colors focus:border-accent"
-          placeholder="Write a message…"
+          className="flex-1 rounded-control border border-line-strong bg-field px-3 py-2.5 text-[13px] text-fg outline-hidden transition-colors focus:border-accent"
+          placeholder={t("placeholder")}
         />
         <div className="flex items-center gap-3">
           {loginUser && (
@@ -241,7 +245,7 @@ const Chat: React.FC<ChatProps> = ({ user }) => {
           <button
             type="submit"
             className="cursor-pointer rounded-control bg-accent px-3 py-2.5 text-white transition-colors hover:bg-accent-hover"
-            aria-label="Send"
+            aria-label={t("send")}
           >
             <FaPaperPlane size={13} />
           </button>

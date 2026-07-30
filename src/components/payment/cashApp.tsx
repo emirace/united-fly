@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useToastNotification } from "@/context/toastNotification";
 import { useSetting } from "@/context/setting";
 import { useFlight } from "@/context/flight";
@@ -14,6 +15,7 @@ import { Button, Panel } from "@/components/ui";
 import { DetailRow, useCountdown } from "./shared";
 
 const CashApp: React.FC<{ price?: number }> = ({ price }) => {
+  const t = useTranslations("payment.cashApp");
   const { user } = useUser();
   const { addNotification } = useToastNotification();
   const { formData } = useFlight();
@@ -31,7 +33,7 @@ const CashApp: React.FC<{ price?: number }> = ({ price }) => {
         await fetchSettings();
       } catch (error) {
         addNotification({
-          message: (error as string) || "An error occurred loading settings.",
+          message: (error as string) || t("settingsError"),
           error: true,
         });
       } finally {
@@ -92,10 +94,10 @@ const CashApp: React.FC<{ price?: number }> = ({ price }) => {
 
   return (
     <div className="w-full">
-      <h2 className="m-0 mb-1.5 font-display text-xl font-semibold">Cash App</h2>
-      <p className="m-0 mb-5 text-sm text-dim">
-        Send the amount due to the tag below.
-      </p>
+      <h2 className="m-0 mb-1.5 font-display text-xl font-semibold">
+        {t("title")}
+      </h2>
+      <p className="m-0 mb-5 text-sm text-dim">{t("copy")}</p>
 
       <div className="flex flex-col items-center">
         <div className="rounded-card bg-white p-3">
@@ -107,15 +109,15 @@ const CashApp: React.FC<{ price?: number }> = ({ price }) => {
       </div>
 
       <Panel className="mt-5 px-5 py-1">
-        <DetailRow label="Amount due" value={`$${price}`} mono />
-        <DetailRow label="Name" value={settings.cashApp.name} />
+        <DetailRow label={t("amountDue")} value={`$${price}`} mono />
+        <DetailRow label={t("name")} value={settings.cashApp.name} />
         <DetailRow
-          label="Cash tag"
+          label={t("cashTag")}
           value={settings.cashApp.tag}
           copy={settings.cashApp.tag}
           mono
         />
-        <DetailRow label="Time left to pay" value={timeLeft} mono />
+        <DetailRow label={t("timeLeft")} value={timeLeft} mono />
       </Panel>
 
       <Button
@@ -124,8 +126,8 @@ const CashApp: React.FC<{ price?: number }> = ({ price }) => {
         onClick={handlePayment}
         disabled={loadingPayment}
       >
-        {loadingPayment && <Loading size="sm" color="border-white" />}I have
-        made payment (${price})
+        {loadingPayment && <Loading size="sm" color="border-white" />}
+        {t("madePayment", { amount: `$${price}` })}
       </Button>
     </div>
   );

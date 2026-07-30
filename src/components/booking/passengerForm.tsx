@@ -1,11 +1,16 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { useFlight } from "@/context/flight";
 import { Eyebrow, Field, Input, Label, Select } from "@/components/ui";
 import CountrySelect from "./countrySelect";
 
-const titles = ["Mr", "Mrs", "Ms", "Dr"];
+/**
+ * Titles and months are persisted on the booking and sent to the API, so the
+ * stored value stays English while only the visible label is translated.
+ */
+const titles = ["Mr", "Mrs", "Ms", "Dr"] as const;
 const months = [
   "January",
   "February",
@@ -19,9 +24,10 @@ const months = [
   "October",
   "November",
   "December",
-];
+] as const;
 
 const PassengerForm: React.FC = () => {
+  const t = useTranslations("booking.passenger");
   const { formData, updateFormData } = useFlight();
 
   const handleChange = (id: number, field: string, value: string) => {
@@ -79,11 +85,11 @@ const PassengerForm: React.FC = () => {
         >
           <button
             type="button"
-            className="flex w-full cursor-pointer items-center justify-between bg-white/3 px-5 py-4 text-left"
+            className="flex w-full cursor-pointer items-center justify-between bg-white/3 px-5 py-4 text-start"
             onClick={() => toggleExpand(passenger.id)}
           >
             <Eyebrow>
-              Traveller {passenger.id} · adult
+              {t("heading", { number: passenger.id })}
               {passenger.firstName ? ` · ${passenger.firstName}` : ""}
             </Eyebrow>
             <span className="text-lg text-faint">
@@ -93,23 +99,28 @@ const PassengerForm: React.FC = () => {
 
           {passenger.expanded && (
             <div className="grid gap-4 p-5 sm:grid-cols-2 lg:grid-cols-4">
-              <Field label="Title">
+              <Field label={t("title")}>
                 <Select
                   value={passenger.title}
                   onChange={(e) =>
                     handleChange(passenger.id, "title", e.target.value)
                   }
                 >
-                  {titles.map((t) => (
-                    <option key={t}>{t}</option>
+                  {titles.map((value) => (
+                    <option key={value} value={value}>
+                      {t("titles." + value.toLowerCase())}
+                    </option>
                   ))}
                 </Select>
               </Field>
 
-              <Field label="First name" className="sm:col-span-1 lg:col-span-2">
+              <Field
+                label={t("firstName")}
+                className="sm:col-span-1 lg:col-span-2"
+              >
                 <Input
                   type="text"
-                  placeholder="As shown on passport"
+                  placeholder={t("firstNamePlaceholder")}
                   value={passenger.firstName}
                   onChange={(e) =>
                     handleChange(passenger.id, "firstName", e.target.value)
@@ -117,10 +128,10 @@ const PassengerForm: React.FC = () => {
                 />
               </Field>
 
-              <Field label="Last name">
+              <Field label={t("lastName")}>
                 <Input
                   type="text"
-                  placeholder="Surname"
+                  placeholder={t("lastNamePlaceholder")}
                   value={passenger.lastName}
                   onChange={(e) =>
                     handleChange(passenger.id, "lastName", e.target.value)
@@ -129,7 +140,7 @@ const PassengerForm: React.FC = () => {
               </Field>
 
               <div className="sm:col-span-2">
-                <Label>Date of birth</Label>
+                <Label>{t("dob")}</Label>
                 <div className="grid grid-cols-3 gap-2.5">
                   <Input
                     type="number"
@@ -145,9 +156,11 @@ const PassengerForm: React.FC = () => {
                       handleDOBChange(passenger.id, "month", e.target.value)
                     }
                   >
-                    <option value="">Month</option>
+                    <option value="">{t("month")}</option>
                     {months.map((m) => (
-                      <option key={m}>{m}</option>
+                      <option key={m} value={m}>
+                        {t("months." + m.toLowerCase())}
+                      </option>
                     ))}
                   </Select>
                   <Input
@@ -161,7 +174,7 @@ const PassengerForm: React.FC = () => {
                 </div>
               </div>
 
-              <Field label="Nationality">
+              <Field label={t("nationality")}>
                 <CountrySelect
                   passenger={passenger}
                   id="nationality"
@@ -169,7 +182,7 @@ const PassengerForm: React.FC = () => {
                 />
               </Field>
 
-              <Field label="Passport issuing country">
+              <Field label={t("passportCountry")}>
                 <CountrySelect
                   passenger={passenger}
                   id="passportCountry"
@@ -178,7 +191,7 @@ const PassengerForm: React.FC = () => {
               </Field>
 
               <Field
-                label="Passport number"
+                label={t("passportNumber")}
                 className="sm:col-span-2 lg:col-span-2"
               >
                 <Input
@@ -191,12 +204,11 @@ const PassengerForm: React.FC = () => {
                   }
                 />
                 <p className="mt-1.5 text-xs text-faint">
-                  Enter a valid passport number — this may affect your booking
-                  confirmation.
+                  {t("passportHint")}
                 </p>
               </Field>
 
-              <Field label="Passport expiry" className="lg:col-span-2">
+              <Field label={t("passportExpiry")} className="lg:col-span-2">
                 <Input
                   type="date"
                   value={passenger.passportExpiry}
@@ -214,7 +226,7 @@ const PassengerForm: React.FC = () => {
         onClick={addPassenger}
         className="cursor-pointer rounded-control border border-dashed border-line-strong px-4 py-2.5 text-[13px] text-accent-bright transition-colors hover:border-accent/50"
       >
-        + Add another traveller
+        {t("addTraveller")}
       </button>
     </div>
   );

@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 import { registerUser } from "@/services/auth";
 import { useToastNotification } from "@/context/toastNotification";
 import AuthShell from "@/components/auth/authShell";
@@ -14,6 +15,7 @@ const validateEmail = (email: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 function SignUpForm() {
+  const t = useTranslations("auth.signup");
   const router = useRouter();
   const { addNotification } = useToastNotification();
   const searchParams = useSearchParams();
@@ -55,13 +57,13 @@ function SignUpForm() {
     const newErrors: Record<string, string | null> = {};
 
     if (!formData.email.trim() || !validateEmail(formData.email)) {
-      newErrors.email = "A valid email is required";
+      newErrors.email = t("errors.email");
     }
     if (!formData.password.trim() || formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters long";
+      newErrors.password = t("errors.password");
     }
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
+      newErrors.confirmPassword = t("errors.confirmPassword");
     }
 
     if (Object.values(newErrors).some((error) => error)) {
@@ -93,30 +95,30 @@ function SignUpForm() {
 
   return (
     <>
-      <h1 className="m-0 mb-2 text-4xl font-semibold">Join MileClub</h1>
+      <h1 className="m-0 mb-2 text-4xl font-semibold">{t("title")}</h1>
       <p className="m-0 mb-7 text-sm text-dim">
-        Already a member?{" "}
+        {t("alreadyMember")}{" "}
         <Link
           href={`/login${redirect ? `?redirect=${redirect}` : ""}`}
           className="text-accent-tint transition-colors hover:text-accent-bright"
         >
-          Sign in
+          {t("signIn")}
         </Link>
       </p>
 
       <form className="flex flex-col gap-4" onSubmit={handleRegister}>
-        <Field label="Full name" error={errors.fullName ?? undefined}>
+        <Field label={t("fullName")} error={errors.fullName ?? undefined}>
           <Input
             name="fullName"
             type="text"
-            placeholder="Ada Okonkwo"
+            placeholder={t("fullNamePlaceholder")}
             value={formData.fullName}
             onChange={handleChange}
             required
           />
         </Field>
 
-        <Field label="Email address" error={errors.email ?? undefined}>
+        <Field label={t("email")} error={errors.email ?? undefined}>
           <Input
             name="email"
             type="email"
@@ -127,20 +129,20 @@ function SignUpForm() {
           />
         </Field>
 
-        <Field label="Password" error={errors.password ?? undefined}>
+        <Field label={t("password")} error={errors.password ?? undefined}>
           <div className="relative">
             <Input
               name="password"
               type={showPassword ? "text" : "password"}
-              placeholder="At least 8 characters"
+              placeholder={t("passwordPlaceholder")}
               value={formData.password}
               onChange={handleChange}
-              className="pr-11"
+              className="pe-11"
               required
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-3.5 flex cursor-pointer items-center text-dim transition-colors hover:text-fg"
+              className="absolute inset-y-0 end-3.5 flex cursor-pointer items-center text-dim transition-colors hover:text-fg"
             >
               {showPassword ? <FiEye /> : <FiEyeOff />}
             </span>
@@ -148,22 +150,22 @@ function SignUpForm() {
         </Field>
 
         <Field
-          label="Confirm password"
+          label={t("confirmPassword")}
           error={errors.confirmPassword ?? undefined}
         >
           <div className="relative">
             <Input
               name="confirmPassword"
               type={showConfirmPassword ? "text" : "password"}
-              placeholder="Repeat your password"
+              placeholder={t("confirmPasswordPlaceholder")}
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="pr-11"
+              className="pe-11"
               required
             />
             <span
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute inset-y-0 right-3.5 flex cursor-pointer items-center text-dim transition-colors hover:text-fg"
+              className="absolute inset-y-0 end-3.5 flex cursor-pointer items-center text-dim transition-colors hover:text-fg"
             >
               {showConfirmPassword ? <FiEye /> : <FiEyeOff />}
             </span>
@@ -172,7 +174,7 @@ function SignUpForm() {
 
         <Button type="submit" size="lg" className="w-full" disabled={loading}>
           {loading && <Loading size="sm" color="border-white" />}
-          Create account
+          {t("submit")}
         </Button>
 
         {errors.general && (

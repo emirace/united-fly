@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans, IBM_Plex_Mono } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import Providers from "@/context";
 import ToastNotification from "@/components/common/toastNotification";
 import Support from "@/components/support";
+import MomentLocale from "@/components/common/momentLocale";
+import { dirFor, isLocale, defaultLocale } from "@/i18n/config";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -28,22 +32,29 @@ export const metadata: Metadata = {
   icons: { icon: "/assets/logo.png" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const resolved = await getLocale();
+  const locale = isLocale(resolved) ? resolved : defaultLocale;
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={dirFor(locale)}
       className={`${spaceGrotesk.variable} ${dmSans.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <Providers>
-          <ToastNotification />
-          {children}
-          <Support />
-        </Providers>
+        <NextIntlClientProvider>
+          <MomentLocale locale={locale} />
+          <Providers>
+            <ToastNotification />
+            {children}
+            <Support />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

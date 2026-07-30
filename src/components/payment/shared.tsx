@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { FaRegCopy } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 import { useToastNotification } from "@/context/toastNotification";
 
 /** Copy-to-clipboard button; reports through the toast instead of `alert()`. */
 export function CopyButton({ value }: { value?: string }) {
+  const t = useTranslations("payment.shared");
   const { addNotification } = useToastNotification();
 
   return (
@@ -15,13 +17,13 @@ export function CopyButton({ value }: { value?: string }) {
         if (!value) return;
         try {
           await navigator.clipboard.writeText(value);
-          addNotification({ message: "Copied to clipboard" });
+          addNotification({ message: t("copied") });
         } catch {
-          addNotification({ message: "Could not copy", error: true });
+          addNotification({ message: t("copyFailed"), error: true });
         }
       }}
       className="cursor-pointer text-dim transition-colors hover:text-fg"
-      aria-label="Copy"
+      aria-label={t("copy")}
     >
       <FaRegCopy />
     </button>
@@ -43,7 +45,7 @@ export function DetailRow({
   return (
     <div className="flex items-start justify-between gap-4 border-b border-line-soft py-3 last:border-b-0">
       <span className="text-[13px] text-dim">{label}</span>
-      <span className="flex items-center gap-2 text-right text-sm font-medium break-all">
+      <span className="flex items-center gap-2 text-end text-sm font-medium break-all">
         <span className={mono ? "font-mono" : undefined}>{value || "—"}</span>
         {copy && <CopyButton value={copy} />}
       </span>

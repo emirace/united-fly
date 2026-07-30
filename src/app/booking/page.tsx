@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { IFlight, useFlight } from "@/context/flight";
 import { useUser } from "@/context/user";
 import { useToastNotification } from "@/context/toastNotification";
 import { formatDuration } from "@/utils";
+import { cabinKeyFor } from "@/lib/cabins";
 import Navbar from "@/components/site/navbar";
 import Footer from "@/components/site/footer";
 import Loading from "@/components/common/loading";
@@ -23,14 +25,11 @@ import {
   Stepper,
 } from "@/components/ui";
 
-const importantInfo = [
-  "Names must match your passport exactly — changes after ticketing cost $60.",
-  "Entry requirements depend on your destination; check visa rules before you fly.",
-  "Free cancellation within 24 hours of booking, then penalties apply.",
-  "One 23kg checked bag and 7kg cabin bag are included in this fare.",
-];
+const importantInfoKeys = ["names", "entry", "cancellation", "baggage"] as const;
 
 export default function Booking() {
+  const t = useTranslations("booking");
+  const tc = useTranslations("common");
   const { getFlight, formData, updateFormData } = useFlight();
   const { user } = useUser();
   const { addNotification } = useToastNotification();
@@ -63,11 +62,11 @@ export default function Booking() {
 
   const handleContinue = () => {
     if (!formData.email) {
-      addNotification({ message: "Enter email", error: true });
+      addNotification({ message: t("errors.email"), error: true });
       return;
     }
     if (!formData.phone) {
-      addNotification({ message: "Enter mobile number", error: true });
+      addNotification({ message: t("errors.phone"), error: true });
       return;
     }
     setIsOpen(true);
@@ -89,7 +88,12 @@ export default function Booking() {
     <div className="mx-auto w-full max-w-[1440px]">
       <Navbar compact />
       <Stepper
-        steps={["Search", "Passengers & seats", "Payment", "Ticket issued"]}
+        steps={[
+          t("steps.search"),
+          t("steps.passengers"),
+          t("steps.payment"),
+          t("steps.issued"),
+        ]}
         current={2}
       />
 
@@ -112,16 +116,18 @@ export default function Booking() {
                 <p className="m-0 text-sm text-dim">
                   {moment(flight.departureTime).format("ddd D MMM YYYY")} ·{" "}
                   {formatDuration(flight.duration)} ·{" "}
-                  {formData.class || "Economy"}
+                  {tc(`cabins.${cabinKeyFor(formData.class)}`)}
                 </p>
               </div>
 
               {/* Itinerary ------------------------------------------- */}
               <Panel className="p-6">
                 <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                  <Eyebrow>Itinerary · {flight.flightNumber}</Eyebrow>
+                  <Eyebrow>
+                    {t("itinerary", { flight: flight.flightNumber })}
+                  </Eyebrow>
                   <Pill tone="success">
-                    {flight.availableSeats} seats available
+                    {t("seatsAvailable", { count: flight.availableSeats })}
                   </Pill>
                 </div>
 
@@ -129,8 +135,8 @@ export default function Booking() {
                   <div className="font-display text-xl font-semibold md:text-2xl">
                     {moment(flight.departureTime).format("HH:mm")}
                   </div>
-                  <div className="relative border-l border-line-strong pb-6 pl-6">
-                    <span className="absolute top-2 -left-[5px] size-2.5 rounded-full bg-accent" />
+                  <div className="relative border-s border-line-strong pb-6 ps-6">
+                    <span className="absolute top-2 -start-[5px] size-2.5 rounded-full bg-accent" />
                     <div className="text-[15px] font-medium">
                       {flight.origin?.city} · {flight.origin?.name} (
                       {flight.origin?.code})
@@ -144,15 +150,15 @@ export default function Booking() {
                   <div className="pt-1 font-mono text-xs text-faint">
                     {formatDuration(flight.duration)}
                   </div>
-                  <div className="border-l border-line-strong pb-6 pl-6 text-[13px] text-dim">
-                    Flight {flight.flightNumber} · meal &amp; 23kg bag included
+                  <div className="border-s border-line-strong pb-6 ps-6 text-[13px] text-dim">
+                    {t("flightIncludes", { flight: flight.flightNumber })}
                   </div>
 
                   <div className="font-display text-xl font-semibold md:text-2xl">
                     {moment(flight.arrivalTime).format("HH:mm")}
                   </div>
-                  <div className="relative pl-6">
-                    <span className="absolute top-2 -left-[5px] size-2.5 rounded-full bg-fg" />
+                  <div className="relative ps-6">
+                    <span className="absolute top-2 -start-[5px] size-2.5 rounded-full bg-fg" />
                     <div className="text-[15px] font-medium">
                       {flight.destination?.city} · {flight.destination?.name} (
                       {flight.destination?.code})
@@ -167,22 +173,20 @@ export default function Booking() {
 
               {/* Travellers ------------------------------------------ */}
               <Panel className="p-6">
-                <Eyebrow className="mb-5">Traveller details</Eyebrow>
+                <Eyebrow className="mb-5">{t("travellerDetails")}</Eyebrow>
                 <div className="mb-5 flex items-center gap-3 rounded-control border border-gold/35 bg-gold/10 px-4 py-3 text-[13px] text-gold">
                   <span className="rounded bg-gold/25 px-2 py-0.5 text-[10px] font-semibold tracking-[0.08em] uppercase">
-                    New
+                    {t("new")}
                   </span>
-                  Please enter each name exactly as it appears on the passport.
+                  {t("nameNotice")}
                 </div>
 
                 <PassengerForm />
 
                 <div className="mt-7">
-                  <Eyebrow className="mb-4">
-                    Booking details will be sent to
-                  </Eyebrow>
+                  <Eyebrow className="mb-4">{t("sendTo")}</Eyebrow>
                   <div className="grid gap-4 sm:grid-cols-2">
-                    <Field label="Mobile number">
+                    <Field label={t("mobile")}>
                       <Input
                         type="text"
                         placeholder="+234 800 000 0000"
@@ -192,7 +196,7 @@ export default function Booking() {
                         }
                       />
                     </Field>
-                    <Field label="Email address">
+                    <Field label={t("email")}>
                       <Input
                         type="email"
                         placeholder="you@example.com"
@@ -208,10 +212,10 @@ export default function Booking() {
 
               {/* Before you continue --------------------------------- */}
               <Panel className="px-6 py-5">
-                <Eyebrow className="mb-3.5">Before you continue</Eyebrow>
+                <Eyebrow className="mb-3.5">{t("beforeContinue")}</Eyebrow>
                 <div className="grid gap-3 text-[13px] leading-relaxed text-muted sm:grid-cols-2 sm:gap-x-7">
-                  {importantInfo.map((info) => (
-                    <div key={info}>{info}</div>
+                  {importantInfoKeys.map((key) => (
+                    <div key={key}>{t("important." + key)}</div>
                   ))}
                 </div>
               </Panel>
@@ -220,29 +224,29 @@ export default function Booking() {
             {/* Fare summary ------------------------------------------ */}
             <aside className="overflow-hidden rounded-card border border-line bg-raised lg:sticky lg:top-6">
               <div className="border-b border-line-soft px-6 py-5">
-                <Eyebrow className="mb-3.5">Fare summary</Eyebrow>
+                <Eyebrow className="mb-3.5">{t("fare.title")}</Eyebrow>
                 <div className="mb-2.5 flex justify-between text-sm">
                   <span className="text-muted">
-                    Base fare × {formData.travelers}
+                    {t("fare.baseFare", { count: formData.travelers })}
                   </span>
                   <span>${flight.price}</span>
                 </div>
                 <div className="mb-2.5 flex justify-between text-sm">
-                  <span className="text-muted">Taxes &amp; carrier charges</span>
-                  <span className="text-success">Included</span>
+                  <span className="text-muted">{t("fare.taxes")}</span>
+                  <span className="text-success">{t("fare.included")}</span>
                 </div>
                 <div className="mb-2.5 flex justify-between text-sm">
-                  <span className="text-muted">Seat selection</span>
-                  <span className="text-success">Included</span>
+                  <span className="text-muted">{t("fare.seat")}</span>
+                  <span className="text-success">{t("fare.included")}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted">Checked bag 23kg</span>
-                  <span className="text-success">Included</span>
+                  <span className="text-muted">{t("fare.bag")}</span>
+                  <span className="text-success">{t("fare.included")}</span>
                 </div>
               </div>
 
               <div className="flex items-baseline justify-between px-6 py-5">
-                <span className="text-sm text-muted">Total due</span>
+                <span className="text-sm text-muted">{t("fare.total")}</span>
                 <span className="font-display text-3xl font-semibold tracking-[-0.02em]">
                   ${total}
                 </span>
@@ -250,18 +254,17 @@ export default function Booking() {
 
               <div className="px-6 pb-6">
                 <Button size="lg" className="w-full" onClick={handleContinue}>
-                  Continue to seats
+                  {t("continueToSeats")}
                 </Button>
                 <p className="m-0 mt-3 text-center text-xs leading-relaxed text-faint">
-                  You won&apos;t be charged until the final step.
+                  {t("noChargeYet")}
                 </p>
               </div>
 
               <div className="border-t border-line-soft px-6 py-5">
-                <Eyebrow className="mb-2.5">Cancellation</Eyebrow>
+                <Eyebrow className="mb-2.5">{t("cancellation.title")}</Eyebrow>
                 <p className="m-0 text-[13px] leading-relaxed text-dim">
-                  Refundable — the penalty depends on how close to departure you
-                  cancel.
+                  {t("cancellation.copy")}
                 </p>
               </div>
             </aside>

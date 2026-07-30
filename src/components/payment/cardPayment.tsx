@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Loading from "@/components/common/loading";
 import { Eyebrow } from "@/components/ui";
 
 const CardPayment: React.FC = () => {
+  const t = useTranslations("payment.card");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,13 +20,9 @@ const CardPayment: React.FC = () => {
         <Loading />
       ) : (
         <div className="text-center">
-          <Eyebrow className="mb-3">Unavailable</Eyebrow>
-          <p className="m-0 text-lg text-danger">
-            Card payment is currently not available.
-          </p>
-          <p className="m-0 mt-2 text-sm text-dim">
-            Please choose another payment method.
-          </p>
+          <Eyebrow className="mb-3">{t("unavailable")}</Eyebrow>
+          <p className="m-0 text-lg text-danger">{t("notAvailable")}</p>
+          <p className="m-0 mt-2 text-sm text-dim">{t("chooseAnother")}</p>
         </div>
       )}
     </div>

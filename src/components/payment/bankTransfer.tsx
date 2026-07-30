@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaExclamationCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import IMAGES from "@/lib/images";
 import { useToastNotification } from "@/context/toastNotification";
 import { useSetting } from "@/context/setting";
@@ -22,6 +23,7 @@ const BankTransfer = ({
   amount?: number;
   close: () => void;
 }) => {
+  const t = useTranslations("payment.mobile");
   const { user } = useUser();
   const { addNotification } = useToastNotification();
   const { settings, fetchSettings } = useSetting();
@@ -38,7 +40,7 @@ const BankTransfer = ({
         await fetchSettings();
       } catch (error) {
         addNotification({
-          message: (error as string) || "An error occurred loading settings.",
+          message: (error as string) || t("settingsError"),
           error: true,
         });
       } finally {
@@ -107,48 +109,46 @@ const BankTransfer = ({
           height={30}
           className="h-8 w-auto"
         />
-        <div className="text-right font-display text-xl font-semibold">
+        <div className="text-end font-display text-xl font-semibold">
           ${amount}
         </div>
       </div>
 
       <h2 className="m-0 mb-1.5 font-display text-xl font-semibold">
-        Mobile transfer
+        {t("title")}
       </h2>
-      <p className="m-0 mb-5 text-sm text-dim">
-        Make a transfer to the account details provided.
-      </p>
+      <p className="m-0 mb-5 text-sm text-dim">{t("copy")}</p>
 
       <Panel className="mb-5 px-5 py-1">
         <DetailRow
-          label="Account number"
+          label={t("accountNumber")}
           value={settings.bankingInfo.accountNumber}
           copy={settings.bankingInfo.accountNumber}
           mono
         />
         <DetailRow
-          label="Account name"
+          label={t("accountName")}
           value={settings.bankingInfo.accountName}
         />
         <DetailRow
-          label="Routing"
+          label={t("routing")}
           value={settings.bankingInfo.routing}
           copy={settings.bankingInfo.routing}
           mono
         />
-        <DetailRow label="Address" value={settings.bankingInfo.address} />
+        <DetailRow label={t("address")} value={settings.bankingInfo.address} />
         <DetailRow
-          label="Bank name"
+          label={t("bankName")}
           value={
             <span className="uppercase">{settings.bankingInfo.bankName}</span>
           }
         />
-        <DetailRow label="Details refresh in" value={countdown} mono />
+        <DetailRow label={t("refreshIn")} value={countdown} mono />
       </Panel>
 
       <p className="mb-3 flex items-center justify-center gap-1.5 text-xs text-faint">
         <FaExclamationCircle />
-        Only confirm if you have made the transfer
+        {t("confirmWarning")}
       </p>
 
       <Button
@@ -157,16 +157,14 @@ const BankTransfer = ({
         onClick={handlePayment}
         disabled={loadingPayment}
       >
-        {loadingPayment && <Loading size="sm" color="border-white" />}I have
-        made payment (${amount})
+        {loadingPayment && <Loading size="sm" color="border-white" />}
+        {t("madePayment", { amount: `$${amount}` })}
       </Button>
       <Button variant="outline" className="mt-3 w-full" onClick={close}>
-        Back to payment methods
+        {t("backToMethods")}
       </Button>
 
-      <Eyebrow className="mt-5 text-center">
-        Your seats are held while you pay
-      </Eyebrow>
+      <Eyebrow className="mt-5 text-center">{t("seatsHeld")}</Eyebrow>
     </div>
   );
 };

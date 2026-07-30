@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import moment from "moment";
+import { useTranslations } from "next-intl";
 import { IBooking } from "@/context/booking";
 import { getBookingByBookingId } from "@/services/booking";
 import { useToastNotification } from "@/context/toastNotification";
@@ -18,6 +19,7 @@ const statusTone = (status: string) => {
 };
 
 export default function Tracking() {
+  const t = useTranslations("tracking");
   const [reference, setReference] = useState("");
   const { addNotification } = useToastNotification();
   const [booking, setBooking] = useState<IBooking | null>(null);
@@ -26,7 +28,7 @@ export default function Tracking() {
 
   const handleSearch = async () => {
     if (!reference) {
-      setError("Please enter your booking reference.");
+      setError(t("errors.reference"));
       return;
     }
     setLoading(true);
@@ -36,7 +38,7 @@ export default function Tracking() {
       const res = await getBookingByBookingId(reference);
       setBooking(res);
     } catch {
-      addNotification({ message: "Booking not found!", error: true });
+      addNotification({ message: t("errors.notFound"), error: true });
       setBooking(null);
     } finally {
       setLoading(false);
@@ -51,11 +53,9 @@ export default function Tracking() {
 
       <div className="mx-auto max-w-[1040px] px-4 pt-12 pb-20 md:px-12">
         <h1 className="m-0 mb-2.5 text-4xl font-semibold tracking-[-0.035em] md:text-[46px]">
-          Where&apos;s my flight?
+          {t("title")}
         </h1>
-        <p className="m-0 mb-7 text-[15px] text-dim">
-          Enter your booking reference. No account needed.
-        </p>
+        <p className="m-0 mb-7 text-[15px] text-dim">{t("subtitle")}</p>
 
         <div className="mb-9 flex flex-col gap-2.5 sm:flex-row">
           <input
@@ -64,7 +64,7 @@ export default function Tracking() {
             onChange={(e) => setReference(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             placeholder="BOOK-1A2B3C4D"
-            className="flex-1 rounded-[14px] border border-line-strong bg-raised px-5 py-4 font-mono text-lg tracking-[0.14em] text-fg uppercase outline-none transition-colors focus:border-accent"
+            className="flex-1 rounded-[14px] border border-line-strong bg-raised px-5 py-4 font-mono text-lg tracking-[0.14em] text-fg uppercase outline-hidden transition-colors focus:border-accent"
           />
           <Button
             size="lg"
@@ -72,7 +72,7 @@ export default function Tracking() {
             onClick={handleSearch}
             disabled={loading}
           >
-            {loading ? "Searching…" : "Track booking"}
+            {loading ? t("searching") : t("submit")}
           </Button>
         </div>
 
@@ -92,7 +92,7 @@ export default function Tracking() {
                   </span>
                 </div>
                 <span className="font-mono text-xs text-faint">
-                  Ref {booking.bookingId}
+                  {t("ref", { reference: booking.bookingId })}
                 </span>
               </div>
 
@@ -103,8 +103,10 @@ export default function Tracking() {
                       {flight.origin?.code}
                     </div>
                     <div className="mt-2 text-[13px] text-dim">
-                      Departs {moment(flight.departureTime).format("HH:mm")} ·{" "}
-                      {flight.origin?.city}
+                      {t("departs", {
+                        time: moment(flight.departureTime).format("HH:mm"),
+                      })}{" "}
+                      · {flight.origin?.city}
                     </div>
                   </div>
 
@@ -114,13 +116,15 @@ export default function Tracking() {
                     </div>
                   </div>
 
-                  <div className="text-right">
+                  <div className="text-end">
                     <div className="font-display text-4xl leading-none font-semibold tracking-[-0.03em] md:text-[44px]">
                       {flight.destination?.code}
                     </div>
                     <div className="mt-2 text-[13px] text-dim">
-                      Arrives {moment(flight.arrivalTime).format("HH:mm")} ·{" "}
-                      {flight.destination?.city}
+                      {t("arrives", {
+                        time: moment(flight.arrivalTime).format("HH:mm"),
+                      })}{" "}
+                      · {flight.destination?.city}
                     </div>
                   </div>
                 </div>
@@ -138,14 +142,16 @@ export default function Tracking() {
                   <span>
                     {moment(flight.departureTime).format("ddd D MMM YYYY")}
                   </span>
-                  <span>Flight {flight.flightNumber}</span>
-                  <span className="capitalize">Status {flight.status}</span>
+                  <span>{t("flightNumber", { flight: flight.flightNumber })}</span>
+                  <span className="capitalize">
+                    {t("status", { status: flight.status })}
+                  </span>
                 </div>
               </div>
 
               <div className="grid border-t border-line-soft hairline-grid md:grid-cols-3">
                 <div className="bg-panel px-6 py-5">
-                  <Eyebrow className="mb-3.5">Travellers</Eyebrow>
+                  <Eyebrow className="mb-3.5">{t("travellers")}</Eyebrow>
                   {booking.travellers?.length ? (
                     booking.travellers.map((traveller, index) => (
                       <div key={index} className="mb-1 text-[15px] font-medium">
@@ -155,23 +161,25 @@ export default function Tracking() {
                     ))
                   ) : (
                     <div className="text-[13px] text-dim">
-                      No traveller details on file
+                      {t("noTravellers")}
                     </div>
                   )}
                 </div>
 
                 <div className="bg-panel px-6 py-5">
-                  <Eyebrow className="mb-3.5">Payment</Eyebrow>
+                  <Eyebrow className="mb-3.5">{t("payment")}</Eyebrow>
                   <div className="mb-1 text-[15px] font-medium capitalize">
                     {booking.paymentStatus}
                   </div>
                   <div className="text-[13px] text-dim">
-                    Booked {moment(booking.createdAt).format("D MMM YYYY")}
+                    {t("booked", {
+                      date: moment(booking.createdAt).format("D MMM YYYY"),
+                    })}
                   </div>
                 </div>
 
                 <div className="bg-panel px-6 py-5">
-                  <Eyebrow className="mb-3.5">Seats</Eyebrow>
+                  <Eyebrow className="mb-3.5">{t("seats")}</Eyebrow>
                   {booking.seatId?.length ? (
                     booking.seatId.map((seat, index) => (
                       <div key={index} className="mb-1 text-[15px] font-medium">
@@ -182,18 +190,16 @@ export default function Tracking() {
                       </div>
                     ))
                   ) : (
-                    <div className="text-[13px] text-dim">No seats assigned</div>
+                    <div className="text-[13px] text-dim">{t("noSeats")}</div>
                   )}
                 </div>
               </div>
             </div>
 
             <Panel className="mt-4 flex flex-wrap items-center justify-between gap-4 px-6 py-5">
-              <div className="text-sm text-muted">
-                Questions about this booking? Our support desk is open 24/7.
-              </div>
+              <div className="text-sm text-muted">{t("supportPrompt")}</div>
               <Button variant="white" size="sm">
-                Contact support
+                {t("contactSupport")}
               </Button>
             </Panel>
           </>

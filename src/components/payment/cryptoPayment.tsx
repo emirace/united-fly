@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useToastNotification } from "@/context/toastNotification";
 import { useSetting } from "@/context/setting";
 import { useFlight } from "@/context/flight";
@@ -21,6 +22,7 @@ type Crypto = {
 };
 
 const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
+  const t = useTranslations("payment.crypto");
   const { user } = useUser();
   const { addNotification } = useToastNotification();
   const { formData } = useFlight();
@@ -40,7 +42,7 @@ const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
         await fetchSettings();
       } catch (error) {
         addNotification({
-          message: (error as string) || "An error occurred loading settings.",
+          message: (error as string) || t("settingsError"),
           error: true,
         });
       } finally {
@@ -107,10 +109,10 @@ const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
   return (
     <div className="w-full">
       <h2 className="m-0 mb-4 font-display text-xl font-semibold">
-        Pay with cryptocurrency
+        {t("title")}
       </h2>
 
-      <Field label="Select a coin">
+      <Field label={t("selectCoin")}>
         <Select
           value={selectedCrypto?.name || ""}
           onChange={(e) =>
@@ -119,7 +121,7 @@ const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
             )
           }
         >
-          <option value="">Select a cryptocurrency</option>
+          <option value="">{t("selectPlaceholder")}</option>
           {settings.cryptoInfo.map((crypto) => (
             <option key={crypto.name} value={crypto.name}>
               {crypto.name} ({crypto.network})
@@ -131,9 +133,7 @@ const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
       {selectedCrypto && (
         <>
           <p className="mt-5 mb-4 text-center text-sm text-dim">
-            Send the amount due to the address below. Only send{" "}
-            <span className="text-fg capitalize">{selectedCrypto.name}</span> to
-            this address.
+            {t("sendWarning", { coin: selectedCrypto.name })}
           </p>
 
           <div className="flex flex-col items-center">
@@ -147,18 +147,18 @@ const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
 
           <Panel className="mt-5 px-5 py-1">
             <DetailRow
-              label="Amount due"
+              label={t("amountDue")}
               value={`${amount} ${selectedCrypto.name}`}
               mono
             />
             <DetailRow
-              label="Wallet address"
+              label={t("walletAddress")}
               value={shortAddress(selectedCrypto.address)}
               copy={selectedCrypto.address}
               mono
             />
-            <DetailRow label="Network" value={selectedCrypto.network} />
-            <DetailRow label="Time left to pay" value={timeLeft} mono />
+            <DetailRow label={t("network")} value={selectedCrypto.network} />
+            <DetailRow label={t("timeLeft")} value={timeLeft} mono />
           </Panel>
 
           <Button
@@ -167,8 +167,10 @@ const CryptoPayment: React.FC<{ price?: number }> = ({ price }) => {
             onClick={handlePayment}
             disabled={loadingPayment}
           >
-            {loadingPayment && <Loading size="sm" color="border-white" />}I have
-            made payment ({amount} {selectedCrypto.name})
+            {loadingPayment && <Loading size="sm" color="border-white" />}
+            {t("madePayment", {
+              amount: `${amount} ${selectedCrypto.name}`,
+            })}
           </Button>
         </>
       )}
