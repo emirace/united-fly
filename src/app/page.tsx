@@ -11,6 +11,8 @@ import Navbar from "@/components/site/navbar";
 import Footer from "@/components/site/footer";
 import SearchPanel from "@/components/home/searchPanel";
 import { Button, Eyebrow, SectionHeading, StatusDot } from "@/components/ui";
+import { cn } from "@/lib/cn";
+import { useLatinEyebrow } from "@/lib/eyebrow";
 
 const destinations: {
   key: string;
@@ -49,6 +51,7 @@ const stats = [
 
 export default function Home() {
   const t = useTranslations("home");
+  const latinEyebrow = useLatinEyebrow();
   const router = useRouter();
 
   useEffect(() => {
@@ -75,7 +78,12 @@ export default function Home() {
         <div className="relative px-6 pt-24 pb-20 md:px-14 md:pt-28 md:pb-28">
           <div className="mb-5 flex items-center gap-3">
             <StatusDot tone="success" pulse />
-            <span className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase">
+            <span
+              className={cn(
+                "text-[11px] text-muted",
+                latinEyebrow && "font-mono tracking-[0.18em] uppercase"
+              )}
+            >
               {t("hero.onTime")}
             </span>
           </div>
@@ -141,7 +149,12 @@ export default function Home() {
                 {destination.code}
               </span>
               {destination.tagged && (
-                <span className="absolute top-3.5 end-3.5 rounded-full border border-gold/40 bg-gold/15 px-2.5 py-1.5 text-[10px] tracking-[0.08em] text-gold uppercase">
+                <span
+                  className={cn(
+                    "absolute top-3.5 end-3.5 rounded-full border border-gold/40 bg-gold/15 px-2.5 py-1.5 text-[10px] text-gold",
+                    latinEyebrow && "tracking-[0.08em] uppercase"
+                  )}
+                >
                   {t("popular.fillingFast")}
                 </span>
               )}

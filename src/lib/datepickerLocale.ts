@@ -20,6 +20,8 @@ import type { Locale as DateFnsLocale } from "date-fns";
  */
 const loaders: Record<string, () => Promise<{ default: DateFnsLocale }>> = {
   fr: () => import("date-fns/locale/fr").then((m) => ({ default: m.fr })),
+  de: () => import("date-fns/locale/de").then((m) => ({ default: m.de })),
+  ja: () => import("date-fns/locale/ja").then((m) => ({ default: m.ja })),
   ar: () => import("date-fns/locale/ar").then((m) => ({ default: m.ar })),
 };
 
