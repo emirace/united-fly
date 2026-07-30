@@ -1,0 +1,660 @@
+{
+  "common": {
+    "changeLanguage": "Change language",
+    "cabins": {
+      "economy": "Economy",
+      "premiumEconomy": "Premium Economy",
+      "business": "Business",
+      "firstClass": "First Class"
+    },
+    "close": "Close"
+  },
+  "nav": {
+    "book": "Book",
+    "trackFlight": "Track flight",
+    "myTrips": "My trips",
+    "help": "Help",
+    "profile": "Profile",
+    "bookings": "Bookings",
+    "track": "Track",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "joinMileClub": "Join MileClub",
+    "join": "Join",
+    "menu": "Menu",
+    "accountMenu": "Account menu"
+  },
+  "footer": {
+    "blurb": "IATA-accredited travel operator. Fares shown include taxes and carrier charges.",
+    "language": "Language",
+    "copyright": "© {year} United Fly Airlines. All rights reserved.",
+    "book": {
+      "title": "Book",
+      "flightSearch": "Flight search",
+      "popularRoutes": "Popular routes",
+      "groupBookings": "Group bookings",
+      "routeMap": "Route map"
+    },
+    "manage": {
+      "title": "Manage",
+      "trackBooking": "Track a booking",
+      "myTrips": "My trips",
+      "payments": "Payments",
+      "profile": "Profile"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "privacy": "Privacy policy",
+      "terms": "Terms & conditions",
+      "contact": "Contact"
+    }
+  },
+  "search": {
+    "oneWay": "One Way",
+    "roundTrip": "Round Trip",
+    "from": "From",
+    "to": "To",
+    "depart": "Depart",
+    "return": "Return",
+    "travellers": "Travellers",
+    "selectOrigin": "Select origin",
+    "selectDestination": "Select destination",
+    "selectDate": "Select date",
+    "selectClass": "Select class",
+    "submit": "Search flights →",
+    "included": "Included",
+    "travellerCount": "{count, plural, one {# traveller} other {# travellers}}",
+    "perks": {
+      "hold": "24h free hold",
+      "taxes": "Taxes in fare",
+      "noCard": "No card to search"
+    },
+    "errors": {
+      "origin": "Please select a departure location.",
+      "destination": "Please select a destination.",
+      "date": "Please select a departure date.",
+      "cabin": "Please select a travel class.",
+      "travellers": "Please select the number of travelers."
+    }
+  },
+  "home": {
+    "hero": {
+      "onTime": "On-time performance 94.2% · June 2026",
+      "title": "Ready when you are.",
+      "subtitle": "630 destinations, one fare screen, no hidden extras. Search live availability and hold your seat for 24 hours — free."
+    },
+    "stats": {
+      "destinations": "Destinations served",
+      "hold": "Free seat hold, no card",
+      "accredited": "Accredited & bonded",
+      "reviews": "18,402 verified reviews"
+    },
+    "popular": {
+      "eyebrow": "Where people are going",
+      "title": "Popular this season",
+      "all": "All 630 destinations",
+      "from": "from",
+      "fillingFast": "Filling fast"
+    },
+    "destinations": {
+      "thailand": {
+        "name": "Thailand",
+        "info": "Next departure 26 Dec · 2 stops"
+      },
+      "hongKong": {
+        "name": "Hong Kong",
+        "info": "Daily service · 1 stop"
+      },
+      "maldives": {
+        "name": "Maldives",
+        "info": "2 flights weekly · 1 stop"
+      },
+      "switzerland": {
+        "name": "Switzerland",
+        "info": "Next available 2 Oct · direct"
+      }
+    },
+    "steps": {
+      "eyebrow": "Three steps",
+      "title": "Booked in under two minutes",
+      "copy": "No account needed to search. Create one at checkout and your booking, boarding pass and refunds all live in one place.",
+      "cta": "Start a search",
+      "search": {
+        "title": "Search live fares",
+        "copy": "Real seat inventory across 630 destinations — no bait pricing."
+      },
+      "seat": {
+        "title": "Pick seat & fare",
+        "copy": "Compare cabins side by side and choose your seat on the map."
+      },
+      "pay": {
+        "title": "Pay your way",
+        "copy": "Card, bank transfer, mobile money or crypto — ticket issued instantly."
+      }
+    },
+    "cta": {
+      "title": "It's time to discover",
+      "copy": "Join MileClub and earn 2× miles on every route this quarter. Free changes, free seat selection, and priority support when plans move.",
+      "join": "Join MileClub",
+      "book": "Book a flight"
+    }
+  },
+  "listing": {
+    "steps": {
+      "search": "Search",
+      "review": "Review",
+      "passengers": "Passengers",
+      "payment": "Payment"
+    },
+    "sort": {
+      "best": "Best",
+      "cheapest": "Cheapest",
+      "fastest": "Fastest"
+    },
+    "bestValue": "Best value",
+    "terminal": "Terminal {number}",
+    "direct": "direct",
+    "cabinBag": "Cabin bag included",
+    "perAdult": "per adult, all in",
+    "selectFlight": "Select flight",
+    "seatsLeft": "{count, plural, one {Only # seat left at this price} other {Only # seats left at this price}}",
+    "refundable": "Refundable · penalty applies after 24h",
+    "anyDate": "Any date",
+    "adultCount": "{count, plural, one {# adult} other {# adults}}",
+    "close": "Close",
+    "edit": "Edit",
+    "updateSearch": "Update search →",
+    "flightsAvailable": "{count, plural, one {# flight available} other {# flights available}}",
+    "allDates": "All dates",
+    "pricesInclude": "prices include taxes & charges",
+    "empty": {
+      "title": "No results",
+      "copy": "No flights match this route and date. Try adjusting your search."
+    }
+  },
+  "booking": {
+    "steps": {
+      "search": "Search",
+      "passengers": "Passengers & seats",
+      "payment": "Payment",
+      "issued": "Ticket issued"
+    },
+    "itinerary": "Itinerary · {flight}",
+    "seatsAvailable": "{count, plural, one {# seat available} other {# seats available}}",
+    "flightIncludes": "Flight {flight} · meal & 23kg bag included",
+    "travellerDetails": "Traveller details",
+    "new": "New",
+    "nameNotice": "Please enter each name exactly as it appears on the passport.",
+    "sendTo": "Booking details will be sent to",
+    "mobile": "Mobile number",
+    "email": "Email address",
+    "beforeContinue": "Before you continue",
+    "important": {
+      "names": "Names must match your passport exactly — changes after ticketing cost $60.",
+      "entry": "Entry requirements depend on your destination; check visa rules before you fly.",
+      "cancellation": "Free cancellation within 24 hours of booking, then penalties apply.",
+      "baggage": "One 23kg checked bag and 7kg cabin bag are included in this fare."
+    },
+    "fare": {
+      "title": "Fare summary",
+      "baseFare": "Base fare × {count}",
+      "taxes": "Taxes & carrier charges",
+      "seat": "Seat selection",
+      "bag": "Checked bag 23kg",
+      "included": "Included",
+      "total": "Total due"
+    },
+    "continueToSeats": "Continue to seats",
+    "noChargeYet": "You won't be charged until the final step.",
+    "cancellation": {
+      "title": "Cancellation",
+      "copy": "Refundable — the penalty depends on how close to departure you cancel."
+    },
+    "errors": {
+      "email": "Enter email",
+      "phone": "Enter mobile number"
+    },
+    "passenger": {
+      "heading": "Traveller {number} · adult",
+      "title": "Title",
+      "titles": {
+        "mr": "Mr",
+        "mrs": "Mrs",
+        "ms": "Ms",
+        "dr": "Dr"
+      },
+      "firstName": "First name",
+      "firstNamePlaceholder": "As shown on passport",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Surname",
+      "dob": "Date of birth",
+      "month": "Month",
+      "months": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+      },
+      "nationality": "Nationality",
+      "passportCountry": "Passport issuing country",
+      "passportNumber": "Passport number",
+      "passportHint": "Enter a valid passport number — this may affect your booking confirmation.",
+      "passportExpiry": "Passport expiry",
+      "searchCountry": "Search country",
+      "addTraveller": "+ Add another traveller"
+    },
+    "seats": {
+      "heading": "Choose your seat",
+      "selected": "Selected",
+      "free": "Free",
+      "taken": "Taken",
+      "chosen": "{count, plural, one {Seat {seats}} other {Seats {seats}}}",
+      "none": "No seat selected",
+      "includedHint": "Included with your fare — no seat fee.",
+      "pickHint": "Pick at least one seat to continue to payment.",
+      "proceed": "Proceed to payment"
+    }
+  },
+  "payment": {
+    "steps": {
+      "search": "Search",
+      "passengers": "Passengers & seats",
+      "payment": "Payment",
+      "issued": "Ticket issued"
+    },
+    "secureCheckout": "Secure checkout · PCI DSS",
+    "title": "How would you like to pay?",
+    "seatsHeld": "Your seats are held while you pay",
+    "seatsHeldFor": "{count, plural, one {Seat {seats} held for you} other {Seats {seats} held for you}}",
+    "proceed": "Proceed",
+    "noChargeNotice": "You will not be charged until you confirm",
+    "methods": {
+      "mobile": {
+        "title": "Mobile transfer",
+        "copy": "Securely transfer funds directly from your mobile bank account."
+      },
+      "bank": {
+        "title": "Bank transfer",
+        "copy": "Securely transfer funds directly from your bank account."
+      },
+      "card": {
+        "title": "Credit / debit card",
+        "copy": "Pay instantly using Visa, Mastercard or Verve."
+      },
+      "crypto": {
+        "title": "Cryptocurrency",
+        "copy": "Pay using Bitcoin, Ethereum or other cryptocurrencies."
+      },
+      "cashapp": {
+        "title": "Cash App",
+        "copy": "Send the amount due to our Cash App tag."
+      }
+    },
+    "shared": {
+      "copied": "Copied to clipboard",
+      "copyFailed": "Could not copy",
+      "copy": "Copy"
+    },
+    "summary": {
+      "title": "Fare summary",
+      "baseFare": "Base fare",
+      "discount": "Discount",
+      "otherServices": "Other services",
+      "total": "Total due",
+      "yourBooking": "Your booking",
+      "travellers": "Travellers",
+      "adult": "Adult",
+      "seats": "Seats {seats}",
+      "reviewBooking": "Review booking"
+    },
+    "card": {
+      "unavailable": "Unavailable",
+      "notAvailable": "Card payment is currently not available.",
+      "chooseAnother": "Please choose another payment method."
+    },
+    "mobile": {
+      "title": "Mobile transfer",
+      "copy": "Make a transfer to the account details provided.",
+      "accountNumber": "Account number",
+      "accountName": "Account name",
+      "routing": "Routing",
+      "address": "Address",
+      "bankName": "Bank name",
+      "refreshIn": "Details refresh in",
+      "confirmWarning": "Only confirm if you have made the transfer",
+      "madePayment": "I have made payment ({amount})",
+      "backToMethods": "Back to payment methods",
+      "seatsHeld": "Your seats are held while you pay",
+      "settingsError": "An error occurred loading settings."
+    },
+    "bank": {
+      "title": "Bank transfer",
+      "copy": "Open the secure payment link below to complete your transfer.",
+      "generating": "Generating payment link",
+      "makePayment": "Make payment ({amount})",
+      "paymentLink": "Payment link"
+    },
+    "cashApp": {
+      "title": "Cash App",
+      "copy": "Send the amount due to the tag below.",
+      "amountDue": "Amount due",
+      "name": "Name",
+      "cashTag": "Cash tag",
+      "timeLeft": "Time left to pay",
+      "madePayment": "I have made payment ({amount})",
+      "settingsError": "An error occurred loading settings."
+    },
+    "crypto": {
+      "title": "Pay with cryptocurrency",
+      "selectCoin": "Select a coin",
+      "selectPlaceholder": "Select a cryptocurrency",
+      "sendWarning": "Send the amount due to the address below. Only send {coin} to this address.",
+      "amountDue": "Amount due",
+      "walletAddress": "Wallet address",
+      "network": "Network",
+      "timeLeft": "Time left to pay",
+      "madePayment": "I have made payment ({amount})",
+      "settingsError": "An error occurred loading settings."
+    },
+    "token": {
+      "route": "Route",
+      "flight": "Flight",
+      "departs": "Departs",
+      "arrives": "Arrives",
+      "class": "Class",
+      "accountNumber": "Account number",
+      "accountName": "Account name",
+      "bankName": "Bank name",
+      "routing": "Routing",
+      "address": "Address",
+      "receiptUploaded": "Receipt uploaded",
+      "receiptFailed": "Failed uploading image"
+    }
+  },
+  "confirm": {
+    "steps": {
+      "search": "Search",
+      "passengers": "Passengers & seats",
+      "payment": "Payment",
+      "issued": "Ticket issued"
+    },
+    "confirming": "Confirming payment",
+    "paymentStatus": "Payment {status}",
+    "copy": "Your flight has been booked. We'll email you as soon as the payment is confirmed.",
+    "rows": {
+      "bookingId": "Booking ID",
+      "bookedBy": "Booked by",
+      "paymentMethod": "Payment method",
+      "totalPrice": "Total price",
+      "dateBooked": "Date booked",
+      "departure": "Departure",
+      "guests": "Guests"
+    },
+    "autoUpdates": "This page updates automatically",
+    "resolved": "Payment resolved",
+    "goToBookings": "Go to my bookings"
+  },
+  "tracking": {
+    "title": "Where's my flight?",
+    "subtitle": "Enter your booking reference. No account needed.",
+    "submit": "Track booking",
+    "searching": "Searching…",
+    "ref": "Ref {reference}",
+    "departs": "Departs {time}",
+    "arrives": "Arrives {time}",
+    "flightNumber": "Flight {flight}",
+    "status": "Status {status}",
+    "travellers": "Travellers",
+    "noTravellers": "No traveller details on file",
+    "payment": "Payment",
+    "booked": "Booked {date}",
+    "seats": "Seats",
+    "noSeats": "No seats assigned",
+    "supportPrompt": "Questions about this booking? Our support desk is open 24/7.",
+    "contactSupport": "Contact support",
+    "errors": {
+      "reference": "Please enter your booking reference.",
+      "notFound": "Booking not found!"
+    }
+  },
+  "contact": {
+    "eyebrow": "Support · 24/7",
+    "title": "Talk to a person, not a queue.",
+    "subtitle": "Average first response under four minutes, any hour, any timezone.",
+    "imageAlt": "Traveller",
+    "sent": "Message sent. We'll be in touch shortly.",
+    "call": {
+      "label": "Call",
+      "title": "Speak to the desk",
+      "copy": "Fastest for same-day changes and cancellations."
+    },
+    "email": {
+      "label": "Email",
+      "title": "Send the details",
+      "copy": "Best for refunds, receipts and documentation."
+    },
+    "chat": {
+      "label": "Chat",
+      "title": "Live chat & WhatsApp",
+      "copy": "Continue the conversation from any device.",
+      "online": "Agents online now"
+    },
+    "form": {
+      "title": "Send us a message",
+      "name": "Your name",
+      "email": "Email address",
+      "mobile": "Mobile number",
+      "reference": "Booking reference (optional)",
+      "message": "How can we help?",
+      "terms": "I agree to the terms and conditions.",
+      "submit": "Send message",
+      "sending": "Sending…"
+    },
+    "faq": {
+      "title": "Common questions",
+      "nameChange": "Can I change the name on a ticket?",
+      "refunds": "How long do refunds take?",
+      "baggage": "What baggage is included in my fare?",
+      "visa": "Do I need a visa for a layover?",
+      "answer": "Our support desk can answer this directly — call, email or start a chat above and quote your booking reference."
+    },
+    "errors": {
+      "required": "Name, email and message are required.",
+      "terms": "Please accept the terms and conditions."
+    }
+  },
+  "auth": {
+    "shell": {
+      "imageAlt": "Aircraft",
+      "pitchTitle": "Every trip, boarding pass and receipt in one place.",
+      "pitchCopy": "MileClub members get 2× miles, free seat selection and priority support.",
+      "copyright": "© {year} United Fly Airlines"
+    },
+    "login": {
+      "title": "Welcome back",
+      "newHere": "New here?",
+      "createAccount": "Create an account",
+      "email": "Email address",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "submit": "Sign in",
+      "or": "or",
+      "trackWithoutSignIn": "Track a booking without signing in",
+      "errors": {
+        "email": "Email is required",
+        "password": "Password is required"
+      }
+    },
+    "signup": {
+      "title": "Join MileClub",
+      "alreadyMember": "Already a member?",
+      "signIn": "Sign in",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Ada Okonkwo",
+      "email": "Email address",
+      "password": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "submit": "Create account",
+      "errors": {
+        "email": "A valid email is required",
+        "password": "Password must be at least 8 characters long",
+        "confirmPassword": "Passwords do not match"
+      }
+    }
+  },
+  "support": {
+    "title": "Support",
+    "greeting": "Hello {name}",
+    "there": "there",
+    "replyTime": "Replies in ~4 min",
+    "open": "Open support",
+    "close": "Close support",
+    "back": "Back",
+    "adminNotice": "Admins answer support from the dashboard inbox.",
+    "faq": {
+      "title": "Common questions",
+      "searchPlaceholder": "Search a question",
+      "questions": {
+        "nameChange": "Can I change the name on a ticket?",
+        "refunds": "How long do refunds take?",
+        "baggage": "What baggage is included in my fare?",
+        "visa": "Do I need a visa for a layover?"
+      },
+      "noMatch": "No matching questions — send us a message instead.",
+      "startTitle": "Start a conversation",
+      "startCopy": "We will reply as soon as we can, but usually within 2 hours.",
+      "startCta": "Send us a message"
+    },
+    "form": {
+      "intro": "Tell us who you are and we'll pick up the conversation from any device.",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Ada Okonkwo",
+      "email": "Email address",
+      "continue": "Continue",
+      "starting": "Starting…",
+      "errors": {
+        "fullName": "Please enter your full name",
+        "email": "Please enter your email"
+      }
+    },
+    "chat": {
+      "empty": "Say hello — an agent will pick this up shortly.",
+      "placeholder": "Write a message…",
+      "send": "Send",
+      "sending": "Sending",
+      "failed": "Failed",
+      "retry": "Retry",
+      "imageUploaded": "Image uploaded",
+      "imageFailed": "Failed uploading image"
+    }
+  },
+  "dashboard": {
+    "nav": {
+      "profile": "Profile",
+      "bookings": "Bookings",
+      "payments": "Payments",
+      "signOut": "Sign out",
+      "menu": "Dashboard menu",
+      "closeMenu": "Close menu"
+    },
+    "bookings": {
+      "title": "Your bookings",
+      "subtitle": "{total} total · {shown} {status}",
+      "bookFlight": "Book a flight",
+      "tabs": {
+        "pending": "Pending",
+        "confirmed": "Upcoming",
+        "cancelled": "Cancelled",
+        "completed": "Completed"
+      },
+      "manage": "Manage booking",
+      "departure": "Departure",
+      "arrival": "Arrival",
+      "seats": "Seats",
+      "empty": {
+        "title": "Nothing here",
+        "copy": "No {status} bookings available."
+      }
+    },
+    "payments": {
+      "title": "Payments",
+      "subtitle": "Receipts for every booking",
+      "searchPlaceholder": "Search by transaction ID"
+    }
+  },
+  "bookingDetail": {
+    "booking": "Booking",
+    "status": "Status",
+    "paymentStatus": "Payment status",
+    "class": "Class",
+    "created": "Created",
+    "flight": "Flight",
+    "flightNumber": "Flight number",
+    "origin": "Origin",
+    "destination": "Destination",
+    "departure": "Departure",
+    "arrival": "Arrival",
+    "flightStatus": "Flight status",
+    "seats": "Seats",
+    "seatNumbered": "Seat {number}",
+    "noSeats": "None assigned",
+    "receipt": "Payment receipt",
+    "travellers": "Travellers",
+    "name": "Name",
+    "dob": "Date of birth",
+    "nationality": "Nationality",
+    "passport": "Passport",
+    "issuingCountry": "Issuing country",
+    "expiry": "Expiry"
+  },
+  "ticket": {
+    "download": "Download ticket",
+    "preparing": "Preparing…",
+    "error": "We couldn't build your ticket. Please try again.",
+    "docType": "E-ticket",
+    "bookingRef": "Booking reference",
+    "flightNumber": "Flight",
+    "cabin": "Cabin",
+    "departure": "Departure",
+    "arrival": "Arrival",
+    "duration": "Duration",
+    "status": "Status",
+    "statuses": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "checkedIn": "Checked in",
+      "completed": "Completed"
+    },
+    "passengers": "Passengers",
+    "passengerName": "Passenger",
+    "seat": "Seat",
+    "seatsSummary": "Seats on this booking: {seats}",
+    "noSeat": "No passengers on this booking.",
+    "totalPaid": "Total paid",
+    "scanAtCheckIn": "Scan at check-in",
+    "issued": "Issued {date}",
+    "notesTitle": "Baggage and check-in",
+    "notes": {
+      "checkIn": "Online check-in opens 24 hours before departure and closes 90 minutes before.",
+      "airport": "Arrive 3 hours before an international departure, 2 hours before a domestic one.",
+      "carryOn": "One cabin bag up to 7 kg (55 × 40 × 20 cm) and one personal item are included.",
+      "checked": "Checked baggage: 1 × 23 kg in Economy and Premium Economy, 2 × 32 kg in Business and First.",
+      "documents": "Carry the passport or ID used at booking. The name on it must match this ticket exactly.",
+      "gate": "Boarding closes 20 minutes before departure. Gate numbers appear on the airport screens."
+    },
+    "disclaimer": "This document confirms your reservation. It is not a boarding pass — collect that at check-in.",
+    "support": "unitedfly.com/support"
+  }
+}

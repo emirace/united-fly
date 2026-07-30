@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 import { loginUser } from "@/services/auth";
 import { useToastNotification } from "@/context/toastNotification";
 import { useUser } from "@/context/user";
@@ -12,6 +13,7 @@ import Loading from "@/components/common/loading";
 import { Button, Field, Input } from "@/components/ui";
 
 function LoginForm() {
+  const t = useTranslations("auth.login");
   const { addNotification } = useToastNotification();
   const { getUser } = useUser();
   const searchParams = useSearchParams();
@@ -37,8 +39,8 @@ function LoginForm() {
     setErrors({ email: null, password: null, general: null });
 
     const newErrors: Record<string, string | null> = {};
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    if (!formData.password.trim()) newErrors.password = "Password is required";
+    if (!formData.email.trim()) newErrors.email = t("errors.email");
+    if (!formData.password.trim()) newErrors.password = t("errors.password");
 
     if (Object.values(newErrors).some((error) => error)) {
       setErrors(newErrors);
@@ -65,19 +67,19 @@ function LoginForm() {
 
   return (
     <>
-      <h1 className="m-0 mb-2 text-4xl font-semibold">Welcome back</h1>
+      <h1 className="m-0 mb-2 text-4xl font-semibold">{t("title")}</h1>
       <p className="m-0 mb-7 text-sm text-dim">
-        New here?{" "}
+        {t("newHere")}{" "}
         <Link
           href={`/signup${redirect ? `?redirect=${redirect}` : ""}`}
           className="text-accent-tint transition-colors hover:text-accent-bright"
         >
-          Create an account
+          {t("createAccount")}
         </Link>
       </p>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <Field label="Email address" error={errors.email ?? undefined}>
+        <Field label={t("email")} error={errors.email ?? undefined}>
           <Input
             name="email"
             type="email"
@@ -88,7 +90,7 @@ function LoginForm() {
           />
         </Field>
 
-        <Field label="Password" error={errors.password ?? undefined}>
+        <Field label={t("password")} error={errors.password ?? undefined}>
           <div className="relative">
             <Input
               name="password"
@@ -96,12 +98,12 @@ function LoginForm() {
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}
-              className="pr-11"
+              className="pe-11"
               required
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-3.5 flex cursor-pointer items-center text-dim transition-colors hover:text-fg"
+              className="absolute inset-y-0 end-3.5 flex cursor-pointer items-center text-dim transition-colors hover:text-fg"
             >
               {showPassword ? <FiEye /> : <FiEyeOff />}
             </span>
@@ -111,13 +113,13 @@ function LoginForm() {
         <div className="flex items-center justify-between text-[13px] text-dim">
           <label className="flex cursor-pointer items-center gap-2">
             <input type="checkbox" className="size-4" />
-            <span>Remember me</span>
+            <span>{t("rememberMe")}</span>
           </label>
         </div>
 
         <Button type="submit" size="lg" className="w-full" disabled={loading}>
           {loading && <Loading size="sm" color="border-white" />}
-          Sign in
+          {t("submit")}
         </Button>
 
         {errors.general && (
@@ -126,7 +128,7 @@ function LoginForm() {
 
         <div className="my-1 flex items-center gap-3.5 text-xs text-faint">
           <span className="h-px flex-1 bg-white/9" />
-          or
+          {t("or")}
           <span className="h-px flex-1 bg-white/9" />
         </div>
 
@@ -137,7 +139,7 @@ function LoginForm() {
           className="w-full"
           onClick={() => router.push("/tracking")}
         >
-          Track a booking without signing in
+          {t("trackWithoutSignIn")}
         </Button>
       </form>
     </>

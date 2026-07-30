@@ -3,43 +3,47 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useFlight } from "@/context/flight";
 import { useAirport } from "@/context/airport";
 import { useToastNotification } from "@/context/toastNotification";
 import { Eyebrow } from "@/components/ui";
 import SelectMenu from "@/components/ui/select-menu";
+import { cabinValues, cabinKeys } from "@/lib/cabins";
+import { useDatePickerLocale } from "@/lib/datepickerLocale";
 import { cn } from "@/lib/cn";
 
-const classes = [
-  { label: "Economy", value: "Economy" },
-  { label: "Premium Economy", value: "Premium Economy" },
-  { label: "Business", value: "Business" },
-  { label: "First Class", value: "First Class" },
-];
-
-const travelerOptions = [1, 2, 3, 4, 5].map((n) => ({
-  label: `${n} ${n === 1 ? "traveller" : "travellers"}`,
-  value: `${n}`,
-}));
-
-const tripTypes = ["One Way", "Round Trip"];
+const tripTypes = ["One Way", "Round Trip"] as const;
 
 /**
  * The home search panel. Same validation and `formData` wiring as before —
  * only the presentation changed to the hairline grid from the design.
  */
 export default function SearchPanel({
-  submitLabel = "Search flights →",
+  submitLabel,
   onSubmitted,
 }: {
   submitLabel?: string;
   /** Called after validation passes, before navigating to the results. */
   onSubmitted?: () => void;
 } = {}) {
+  const t = useTranslations("search");
+  const tc = useTranslations("common");
+  const datePickerLocale = useDatePickerLocale();
   const { addNotification } = useToastNotification();
   const { airports } = useAirport();
   const router = useRouter();
   const { formData, updateFormData } = useFlight();
+
+  const classes = cabinValues.map((value) => ({
+    label: tc(`cabins.${cabinKeys[value]}`),
+    value,
+  }));
+
+  const travelerOptions = [1, 2, 3, 4, 5].map((n) => ({
+    label: t("travellerCount", { count: n }),
+    value: `${n}`,
+  }));
 
   const airportOptions = (exclude: string) =>
     airports
@@ -55,32 +59,23 @@ export default function SearchPanel({
 
   const handleSubmit = () => {
     if (!formData.from) {
-      addNotification({
-        message: "Please select a departure location.",
-        error: true,
-      });
+      addNotification({ message: t("errors.origin"), error: true });
       return;
     }
     if (!formData.to) {
-      addNotification({ message: "Please select a destination.", error: true });
+      addNotification({ message: t("errors.destination"), error: true });
       return;
     }
     if (!formData.date) {
-      addNotification({
-        message: "Please select a departure date.",
-        error: true,
-      });
+      addNotification({ message: t("errors.date"), error: true });
       return;
     }
     if (!formData.class) {
-      addNotification({ message: "Please select a travel class.", error: true });
+      addNotification({ message: t("errors.cabin"), error: true });
       return;
     }
     if (!formData.travelers) {
-      addNotification({
-        message: "Please select the number of travelers.",
-        error: true,
-      });
+      addNotification({ message: t("errors.travellers"), error: true });
       return;
     }
 
@@ -104,7 +99,7 @@ export default function SearchPanel({
                 : "border border-line-strong text-dim hover:text-fg"
             )}
           >
-            {type}
+            {type === "One Way" ? t("oneWay") : t("roundTrip")}
           </button>
         ))}
       </div>
@@ -118,7 +113,7 @@ export default function SearchPanel({
         )}
       >
         <div className="bg-field px-4 py-4">
-          <Eyebrow className="mb-2">From</Eyebrow>
+          <Eyebrow className="mb-2">{t("from")}</Eyebrow>
           <div className="flex items-baseline gap-2">
             {codeFor(formData.from) && (
               <span className="font-display text-xl font-semibold tracking-[-0.02em]">
@@ -128,7 +123,7 @@ export default function SearchPanel({
             <SelectMenu
               bare
               options={airportOptions(formData.to)}
-              placeholder="Select origin"
+              placeholder={t("selectOrigin")}
               onChange={(value) => updateFormData({ from: value })}
               value={formData.from}
             />
@@ -136,7 +131,7 @@ export default function SearchPanel({
         </div>
 
         <div className="bg-field px-4 py-4">
-          <Eyebrow className="mb-2">To</Eyebrow>
+          <Eyebrow className="mb-2">{t("to")}</Eyebrow>
           <div className="flex items-baseline gap-2">
             {codeFor(formData.to) && (
               <span className="font-display text-xl font-semibold tracking-[-0.02em]">
@@ -146,7 +141,7 @@ export default function SearchPanel({
             <SelectMenu
               bare
               options={airportOptions(formData.from)}
-              placeholder="Select destination"
+              placeholder={t("selectDestination")}
               onChange={(value) => updateFormData({ to: value })}
               value={formData.to}
             />
@@ -154,7 +149,7 @@ export default function SearchPanel({
         </div>
 
         <div className="bg-field px-4 py-4">
-          <Eyebrow className="mb-2">Depart</Eyebrow>
+          <Eyebrow className="mb-2">{t("depart")}</Eyebrow>
           <DatePicker
             selected={formData.date ? new Date(formData.date) : null}
             onChange={(date: Date | null) =>
@@ -162,14 +157,15 @@ export default function SearchPanel({
             }
             minDate={new Date()}
             dateFormat="EEE, d MMM"
-            placeholderText="Select date"
-            className="w-full bg-transparent text-base font-medium text-fg outline-none placeholder:text-faint"
+            locale={datePickerLocale}
+            placeholderText={t("selectDate")}
+            className="w-full bg-transparent text-base font-medium text-fg outline-hidden placeholder:text-faint"
           />
         </div>
 
         {isRoundTrip && (
           <div className="bg-field px-4 py-4">
-            <Eyebrow className="mb-2">Return</Eyebrow>
+            <Eyebrow className="mb-2">{t("return")}</Eyebrow>
             <DatePicker
               selected={
                 formData.returnDate ? new Date(formData.returnDate) : null
@@ -179,18 +175,19 @@ export default function SearchPanel({
               }
               minDate={formData.date ? new Date(formData.date) : new Date()}
               dateFormat="EEE, d MMM"
-              placeholderText="Select date"
-              className="w-full bg-transparent text-base font-medium text-fg outline-none placeholder:text-faint"
+              locale={datePickerLocale}
+              placeholderText={t("selectDate")}
+              className="w-full bg-transparent text-base font-medium text-fg outline-hidden placeholder:text-faint"
             />
           </div>
         )}
 
         <div className="bg-field px-4 py-4">
-          <Eyebrow className="mb-2">Travellers</Eyebrow>
+          <Eyebrow className="mb-2">{t("travellers")}</Eyebrow>
           <SelectMenu
             bare
             options={travelerOptions}
-            placeholder="1 traveller"
+            placeholder={t("travellerCount", { count: 1 })}
             onChange={(value) => updateFormData({ travelers: parseFloat(value) })}
             value={`${formData.travelers}`}
           />
@@ -199,7 +196,7 @@ export default function SearchPanel({
               bare
               className="[&_span]:text-xs [&_span]:font-normal"
               options={classes}
-              placeholder="Select class"
+              placeholder={t("selectClass")}
               onChange={(value) => updateFormData({ class: value })}
               value={formData.class}
             />
@@ -211,19 +208,19 @@ export default function SearchPanel({
             onClick={handleSubmit}
             className="flex h-full w-full min-w-[150px] cursor-pointer items-center justify-center gap-2.5 rounded-btn bg-accent px-6 py-3.5 font-display text-[15px] font-semibold text-white transition-colors hover:bg-accent-hover"
           >
-            {submitLabel}
+            {submitLabel ?? t("submit")}
           </button>
         </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-2.5 px-3 pt-3.5 pb-2">
-        <Eyebrow>Included</Eyebrow>
-        {["24h free hold", "Taxes in fare", "No card to search"].map((chip) => (
+        <Eyebrow>{t("included")}</Eyebrow>
+        {(["hold", "taxes", "noCard"] as const).map((chip) => (
           <span
             key={chip}
             className="rounded-full border border-line-soft bg-white/5 px-3 py-1.5 font-mono text-xs text-muted"
           >
-            {chip}
+            {t(`perks.${chip}`)}
           </span>
         ))}
       </div>

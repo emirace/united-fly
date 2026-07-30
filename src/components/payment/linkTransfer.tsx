@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useToastNotification } from "@/context/toastNotification";
 import { useFlight } from "@/context/flight";
 import { useUser } from "@/context/user";
@@ -17,6 +18,7 @@ const LinkTransfer = ({
   amount?: number;
   close: () => void;
 }) => {
+  const t = useTranslations("payment.bank");
   const { user } = useUser();
   const { addNotification } = useToastNotification();
   const { formData } = useFlight();
@@ -60,7 +62,7 @@ const LinkTransfer = ({
   if (loading) {
     return (
       <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-5 text-sm text-dim">
-        Generating payment link
+        {t("generating")}
         <Loading />
       </div>
     );
@@ -69,11 +71,9 @@ const LinkTransfer = ({
   return (
     <div className="w-full">
       <h2 className="m-0 mb-1.5 font-display text-xl font-semibold">
-        Bank transfer
+        {t("title")}
       </h2>
-      <p className="m-0 mb-5 text-sm text-dim">
-        Open the secure payment link below to complete your transfer.
-      </p>
+      <p className="m-0 mb-5 text-sm text-dim">{t("copy")}</p>
 
       <a
         href={link}
@@ -81,11 +81,11 @@ const LinkTransfer = ({
         rel="noopener noreferrer"
         className="flex w-full items-center justify-center rounded-btn bg-accent px-6 py-4 font-display text-[15px] font-semibold text-white transition-colors hover:bg-accent-hover"
       >
-        Make payment (${amount})
+        {t("makePayment", { amount: `$${amount}` })}
       </a>
 
       <Panel className="mt-5 px-5 py-1">
-        <DetailRow label="Payment link" value={link} copy={link} mono />
+        <DetailRow label={t("paymentLink")} value={link} copy={link} mono />
       </Panel>
     </div>
   );

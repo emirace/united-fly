@@ -17,13 +17,14 @@ import { useUser } from "@/context/user";
 import Navbar from "@/components/site/navbar";
 import Footer from "@/components/site/footer";
 import { Eyebrow } from "@/components/ui";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 
 const memberLinks = [
-  { name: "Profile", icon: HiOutlineUser, path: "/dashboard/profile" },
-  { name: "Bookings", icon: HiOutlineTicket, path: "/dashboard/bookings" },
-  { name: "Payments", icon: FaCreditCard, path: "/dashboard/payments" },
-];
+  { key: "profile", icon: HiOutlineUser, path: "/dashboard/profile" },
+  { key: "bookings", icon: HiOutlineTicket, path: "/dashboard/bookings" },
+  { key: "payments", icon: FaCreditCard, path: "/dashboard/payments" },
+] as const;
 
 const adminLinks = [
   { name: "Airports", icon: MdOutlineFlight, path: "/dashboard/airports" },
@@ -59,6 +60,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("dashboard.nav");
   const { user, logout } = useUser();
   const router = useRouter();
   const pathname = usePathname();
@@ -103,7 +105,10 @@ export default function DashboardLayout({
 
       <div className="flex flex-col gap-0.5">
         {memberLinks.map((link) => (
-          <NavItem key={link.path} link={link} />
+          <NavItem
+            key={link.path}
+            link={{ ...link, name: t(link.key) }}
+          />
         ))}
       </div>
 
@@ -127,7 +132,7 @@ export default function DashboardLayout({
           className="flex w-full cursor-pointer items-center gap-3 rounded-control px-3.5 py-2.5 text-left text-sm text-danger transition-colors hover:bg-danger/10"
         >
           <HiOutlineLogout size={18} />
-          <span>Sign out</span>
+          <span>{t("signOut")}</span>
         </button>
       </div>
     </>
@@ -142,7 +147,7 @@ export default function DashboardLayout({
           onClick={() => setIsOpen(true)}
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-control border border-line-strong px-4 py-3 text-sm text-muted lg:hidden"
         >
-          <IoMenu size={18} /> Dashboard menu
+          <IoMenu size={18} /> {t("menu")}
         </button>
 
         {/* Desktop sidebar */}
@@ -157,11 +162,11 @@ export default function DashboardLayout({
               className="absolute inset-0 bg-black/60"
               onClick={() => setIsOpen(false)}
             />
-            <div className="absolute top-0 right-0 bottom-0 w-72 overflow-y-auto bg-panel p-4 scrollbar-slim">
+            <div className="absolute inset-y-0 end-0 w-72 overflow-y-auto bg-panel p-4 scrollbar-slim">
               <button
                 onClick={() => setIsOpen(false)}
-                className="mb-4 ml-auto block cursor-pointer text-2xl text-dim"
-                aria-label="Close menu"
+                className="mb-4 ms-auto block cursor-pointer text-2xl text-dim"
+                aria-label={t("closeMenu")}
               >
                 <IoClose />
               </button>

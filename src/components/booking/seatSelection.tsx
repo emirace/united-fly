@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { getSeats } from "@/services/flight";
 import { useFlight } from "@/context/flight";
 import Loading from "@/components/common/loading";
@@ -31,6 +32,7 @@ const FlightSeatSelection: React.FC<FlightSeatSelectionProps> = ({
   seatsPerRow = 4,
   onSubmit,
 }) => {
+  const t = useTranslations("booking.seats");
   const { formData } = useFlight();
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -83,19 +85,19 @@ const FlightSeatSelection: React.FC<FlightSeatSelectionProps> = ({
   return (
     <div className="w-full">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-        <Eyebrow>Choose your seat</Eyebrow>
+        <Eyebrow>{t("heading")}</Eyebrow>
         <div className="flex flex-wrap gap-4 text-xs text-dim">
           <span className="flex items-center gap-1.5">
             <span className="size-3 rounded-sm bg-accent" />
-            Selected
+            {t("selected")}
           </span>
           <span className="flex items-center gap-1.5">
             <span className="size-3 rounded-sm border border-white/25" />
-            Free
+            {t("free")}
           </span>
           <span className="flex items-center gap-1.5">
             <span className="size-3 rounded-sm bg-white/15" />
-            Taken
+            {t("taken")}
           </span>
         </div>
       </div>
@@ -130,13 +132,14 @@ const FlightSeatSelection: React.FC<FlightSeatSelectionProps> = ({
       <div className="mt-5 rounded-card border border-accent/28 bg-accent/8 p-4">
         <div className="font-display text-lg font-semibold">
           {selectedSeats.length > 0
-            ? `Seat${selectedSeats.length > 1 ? "s" : ""} ${selectedSeats.join(", ")}`
-            : "No seat selected"}
+            ? t("chosen", {
+                count: selectedSeats.length,
+                seats: selectedSeats.join(", "),
+              })
+            : t("none")}
         </div>
         <p className="m-0 mt-1 text-[13px] text-muted">
-          {selectedSeats.length > 0
-            ? "Included with your fare — no seat fee."
-            : "Pick at least one seat to continue to payment."}
+          {selectedSeats.length > 0 ? t("includedHint") : t("pickHint")}
         </p>
       </div>
 
@@ -146,7 +149,7 @@ const FlightSeatSelection: React.FC<FlightSeatSelectionProps> = ({
         onClick={() => onSubmit(selectedSeats)}
         disabled={selectedSeats.length === 0}
       >
-        Proceed to payment
+        {t("proceed")}
       </Button>
     </div>
   );

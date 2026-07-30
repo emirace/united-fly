@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState, useEffect, ChangeEvent, useCallback } from "react";
 import moment from "moment";
 import { useParams, useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ import { DetailRow } from "@/components/payment/shared";
  * reads the bank details and uploads a transfer receipt.
  */
 export default function BookingPayment() {
+  const t = useTranslations("payment.token");
   const { addNotification } = useToastNotification();
   const { settings, fetchSettings } = useSetting();
   const params = useParams<{ paymentId: string }>();
@@ -84,9 +86,9 @@ export default function BookingPayment() {
       if (!file) throw Error("No image found");
 
       setImage(await compressImageUpload(file, 1024));
-      addNotification({ message: "Receipt uploaded" });
+      addNotification({ message: t("receiptUploaded") });
     } catch {
-      addNotification({ message: "Failed uploading image", error: true });
+      addNotification({ message: t("receiptFailed"), error: true });
     } finally {
       setUploading(false);
     }
@@ -119,19 +121,19 @@ export default function BookingPayment() {
           {flight && (
             <Panel className="mb-4 px-5 py-1">
               <DetailRow
-                label="Route"
+                label={t("route")}
                 value={`${flight.origin?.city} (${flight.origin?.code}) → ${flight.destination?.city} (${flight.destination?.code})`}
               />
-              <DetailRow label="Flight" value={flight.flightNumber} mono />
+              <DetailRow label={t("flight")} value={flight.flightNumber} mono />
               <DetailRow
-                label="Departs"
+                label={t("departs")}
                 value={moment(flight.departureTime).format("ddd D MMM · HH:mm")}
               />
               <DetailRow
-                label="Arrives"
+                label={t("arrives")}
                 value={moment(flight.arrivalTime).format("ddd D MMM · HH:mm")}
               />
-              <DetailRow label="Class" value={payment?.bookingId?.class} />
+              <DetailRow label={t("class")} value={payment?.bookingId?.class} />
             </Panel>
           )}
 
@@ -142,17 +144,17 @@ export default function BookingPayment() {
 
           <Panel className="mb-5 px-5 py-1">
             <DetailRow
-              label="Account number"
+              label={t("accountNumber")}
               value={settings.bankingInfo.accountNumber}
               copy={settings.bankingInfo.accountNumber}
               mono
             />
             <DetailRow
-              label="Account name"
+              label={t("accountName")}
               value={settings.bankingInfo.accountName}
             />
             <DetailRow
-              label="Bank name"
+              label={t("bankName")}
               value={
                 <span className="uppercase">
                   {settings.bankingInfo.bankName}
@@ -160,12 +162,12 @@ export default function BookingPayment() {
               }
             />
             <DetailRow
-              label="Routing"
+              label={t("routing")}
               value={settings.bankingInfo.routing}
               copy={settings.bankingInfo.routing}
               mono
             />
-            <DetailRow label="Address" value={settings.bankingInfo.address} />
+            <DetailRow label={t("address")} value={settings.bankingInfo.address} />
           </Panel>
 
           <p className="mb-4 flex items-center justify-center gap-1.5 text-xs text-faint">

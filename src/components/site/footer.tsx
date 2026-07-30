@@ -1,41 +1,47 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import IMAGES from "@/lib/images";
 import { Eyebrow } from "@/components/ui";
+import LanguageSwitcher from "./languageSwitcher";
 
 const columns = [
   {
-    title: "Book",
+    key: "book",
     links: [
-      { label: "Flight search", href: "/" },
-      { label: "Popular routes", href: "/listing" },
-      { label: "Group bookings", href: "/contact" },
-      { label: "Route map", href: "/listing" },
+      { key: "flightSearch", href: "/" },
+      { key: "popularRoutes", href: "/listing" },
+      { key: "groupBookings", href: "/contact" },
+      { key: "routeMap", href: "/listing" },
     ],
   },
   {
-    title: "Manage",
+    key: "manage",
     links: [
-      { label: "Track a booking", href: "/tracking" },
-      { label: "My trips", href: "/dashboard/bookings" },
-      { label: "Payments", href: "/dashboard/payments" },
-      { label: "Profile", href: "/dashboard/profile" },
+      { key: "trackBooking", href: "/tracking" },
+      { key: "myTrips", href: "/dashboard/bookings" },
+      { key: "payments", href: "/dashboard/payments" },
+      { key: "profile", href: "/dashboard/profile" },
     ],
   },
   {
-    title: "Company",
+    key: "company",
     links: [
-      { label: "About", href: "/contact" },
-      { label: "Privacy policy", href: "/contact" },
-      { label: "Terms & conditions", href: "/contact" },
-      { label: "Contact", href: "/contact" },
+      { key: "about", href: "/contact" },
+      { key: "privacy", href: "/contact" },
+      { key: "terms", href: "/contact" },
+      { key: "contact", href: "/contact" },
     ],
   },
-];
+] as const;
 
 const socials = ["f", "X", "in", "ig"];
 
 export default function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className="mt-24 border-t border-line px-6 pt-12 pb-10 md:px-12">
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -53,10 +59,9 @@ export default function Footer() {
             </span>
           </div>
           <p className="m-0 mb-5 max-w-[34ch] text-[13px] leading-relaxed text-faint">
-            IATA-accredited travel operator. Fares shown include taxes and
-            carrier charges.
+            {t("blurb")}
           </p>
-          <div className="flex gap-2.5">
+          <div className="mb-6 flex gap-2.5">
             {socials.map((social) => (
               <span
                 key={social}
@@ -66,18 +71,22 @@ export default function Footer() {
               </span>
             ))}
           </div>
+          <div className="max-w-[15rem]">
+            <Eyebrow className="mb-2">{t("language")}</Eyebrow>
+            <LanguageSwitcher variant="block" />
+          </div>
         </div>
 
         {columns.map((column) => (
-          <div key={column.title} className="flex flex-col gap-2.5">
-            <Eyebrow className="mb-1.5">{column.title}</Eyebrow>
+          <div key={column.key} className="flex flex-col gap-2.5">
+            <Eyebrow className="mb-1.5">{t(`${column.key}.title`)}</Eyebrow>
             {column.links.map((link) => (
               <Link
-                key={link.label}
+                key={link.key}
                 href={link.href}
                 className="text-[13px] text-muted transition-colors hover:text-fg"
               >
-                {link.label}
+                {t(`${column.key}.${link.key}`)}
               </Link>
             ))}
           </div>
@@ -85,7 +94,7 @@ export default function Footer() {
       </div>
 
       <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-line-soft pt-6 text-xs text-faint">
-        <span>© 2026 United Fly Airlines. All rights reserved.</span>
+        <span>{t("copyright", { year: 2026 })}</span>
         <span className="font-mono tracking-[0.1em]">
           LOS · LHR · JFK · DXB · ZRH · BKK
         </span>

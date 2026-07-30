@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { usePayment, IPayment } from "@/context/payment";
@@ -18,6 +19,7 @@ import {
 const ITEMS_PER_PAGE = 5;
 
 export default function Payments() {
+  const t = useTranslations("dashboard.payments");
   const { fetchUserPayments } = usePayment();
   const { addNotification } = useToastNotification();
   const [payments, setPayments] = useState<IPayment[]>([]);
@@ -51,7 +53,7 @@ export default function Payments() {
 
   return (
     <div>
-      <PageHeader title="Payments" subtitle="Receipts for every booking" />
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
       <SearchBar
         value={search}
@@ -59,7 +61,7 @@ export default function Payments() {
           setSearch(value);
           setCurrentPage(1);
         }}
-        placeholder="Search by transaction ID"
+        placeholder={t("searchPlaceholder")}
         count={payments.length}
         countLabel="payments"
       />

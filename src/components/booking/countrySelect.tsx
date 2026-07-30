@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { IPassenger } from "@/context/flight";
 import { countries } from "@/lib/countries";
 
@@ -13,6 +14,7 @@ const CountrySelect: React.FC<{
   id: "nationality" | "passportCountry";
   handleChange: (id: number, field: string, value: string) => void;
 }> = ({ passenger, handleChange, id }) => {
+  const t = useTranslations("booking.passenger");
   const [search, setSearch] = useState(passenger[id] || "");
   const [showDropdown, setShowDropdown] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -47,8 +49,8 @@ const CountrySelect: React.FC<{
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         onFocus={() => setShowDropdown(true)}
-        className="w-full rounded-control border border-line-strong bg-field px-4 py-3 text-sm text-fg outline-none transition-colors focus:border-accent"
-        placeholder="Search country"
+        className="w-full rounded-control border border-line-strong bg-field px-4 py-3 text-sm text-fg outline-hidden transition-colors focus:border-accent"
+        placeholder={t("searchCountry")}
       />
 
       {showDropdown && filteredCountries.length > 0 && (

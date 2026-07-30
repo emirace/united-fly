@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { FaWhatsapp } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 import IMAGES from "@/lib/images";
 import { useSetting } from "@/context/setting";
 import { useToastNotification } from "@/context/toastNotification";
@@ -19,12 +20,7 @@ import {
   Textarea,
 } from "@/components/ui";
 
-const faqs = [
-  "Can I change the name on a ticket?",
-  "How long do refunds take?",
-  "What baggage is included in my fare?",
-  "Do I need a visa for a layover?",
-];
+const faqKeys = ["nameChange", "refunds", "baggage", "visa"] as const;
 
 const emptyForm = {
   name: "",
@@ -35,6 +31,7 @@ const emptyForm = {
 };
 
 export default function Contact() {
+  const t = useTranslations("contact");
   const { settings, fetchSettings } = useSetting();
   const { addNotification } = useToastNotification();
   const [form, setForm] = useState(emptyForm);
@@ -57,17 +54,11 @@ export default function Contact() {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.message) {
-      addNotification({
-        message: "Name, email and message are required.",
-        error: true,
-      });
+      addNotification({ message: t("errors.required"), error: true });
       return;
     }
     if (!agreed) {
-      addNotification({
-        message: "Please accept the terms and conditions.",
-        error: true,
-      });
+      addNotification({ message: t("errors.terms"), error: true });
       return;
     }
 
@@ -81,7 +72,7 @@ export default function Contact() {
         }\nBooking reference: ${form.reference || "—"}\n\n${form.message}`,
         `Contact form — ${form.name}`
       );
-      addNotification({ message: "Message sent. We'll be in touch shortly." });
+      addNotification({ message: t("sent") });
       setForm(emptyForm);
       setAgreed(false);
     } catch (error) {
@@ -97,23 +88,23 @@ export default function Contact() {
 
       <section className="px-4 pt-14 md:px-12">
         <div className="max-w-[60ch]">
-          <Eyebrow className="mb-3.5">Support · 24/7</Eyebrow>
+          <Eyebrow className="mb-3.5">{t("eyebrow")}</Eyebrow>
           <h1 className="m-0 mb-3.5 text-4xl leading-[1.02] font-semibold tracking-[-0.035em] text-balance md:text-[52px]">
-            Talk to a person, not a queue.
+            {t("title")}
           </h1>
           <p className="m-0 text-base leading-relaxed text-dim">
-            Average first response under four minutes, any hour, any timezone.
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           <Panel className="p-6">
-            <Eyebrow className="mb-4 text-accent">Call</Eyebrow>
+            <Eyebrow className="mb-4 text-accent">{t("call.label")}</Eyebrow>
             <h3 className="m-0 mb-2 font-display text-[19px] font-semibold">
-              Speak to the desk
+              {t("call.title")}
             </h3>
             <p className="m-0 mb-4 text-[13px] leading-relaxed text-dim">
-              Fastest for same-day changes and cancellations.
+              {t("call.copy")}
             </p>
             <div className="flex flex-col gap-2">
               <a
@@ -132,12 +123,12 @@ export default function Contact() {
           </Panel>
 
           <Panel className="p-6">
-            <Eyebrow className="mb-4 text-accent">Email</Eyebrow>
+            <Eyebrow className="mb-4 text-accent">{t("email.label")}</Eyebrow>
             <h3 className="m-0 mb-2 font-display text-[19px] font-semibold">
-              Send the details
+              {t("email.title")}
             </h3>
             <p className="m-0 mb-4 text-[13px] leading-relaxed text-dim">
-              Best for refunds, receipts and documentation.
+              {t("email.copy")}
             </p>
             <a
               href={`mailto:${supportEmail}`}
@@ -148,16 +139,16 @@ export default function Contact() {
           </Panel>
 
           <Panel className="p-6">
-            <Eyebrow className="mb-4 text-accent">Chat</Eyebrow>
+            <Eyebrow className="mb-4 text-accent">{t("chat.label")}</Eyebrow>
             <h3 className="m-0 mb-2 font-display text-[19px] font-semibold">
-              Live chat &amp; WhatsApp
+              {t("chat.title")}
             </h3>
             <p className="m-0 mb-4 text-[13px] leading-relaxed text-dim">
-              Continue the conversation from any device.
+              {t("chat.copy")}
             </p>
             <div className="flex items-center gap-2 text-[13px] text-success">
               <StatusDot tone="success" pulse />
-              Agents online now
+              {t("chat.online")}
             </div>
           </Panel>
         </div>
@@ -167,7 +158,7 @@ export default function Contact() {
         <div className="flex items-center justify-center rounded-panel bg-plate p-9">
           <Image
             src={IMAGES.contact}
-            alt="Traveller"
+            alt={t("imageAlt")}
             width={420}
             height={420}
             className="h-auto w-full max-w-[420px]"
@@ -176,17 +167,17 @@ export default function Contact() {
 
         <div>
           <h2 className="m-0 mb-5 text-3xl font-semibold tracking-[-0.03em] md:text-[34px]">
-            Send us a message
+            {t("form.title")}
           </h2>
 
           <form
             onSubmit={handleSubmit}
             className="grid gap-3.5 sm:grid-cols-2"
           >
-            <Field label="Your name">
+            <Field label={t("form.name")}>
               <Input name="name" value={form.name} onChange={handleChange} />
             </Field>
-            <Field label="Email address">
+            <Field label={t("form.email")}>
               <Input
                 name="email"
                 type="email"
@@ -194,7 +185,7 @@ export default function Contact() {
                 onChange={handleChange}
               />
             </Field>
-            <Field label="Mobile number">
+            <Field label={t("form.mobile")}>
               <Input
                 name="mobile"
                 type="tel"
@@ -202,7 +193,7 @@ export default function Contact() {
                 onChange={handleChange}
               />
             </Field>
-            <Field label="Booking reference (optional)">
+            <Field label={t("form.reference")}>
               <Input
                 name="reference"
                 value={form.reference}
@@ -211,7 +202,7 @@ export default function Contact() {
                 className="font-mono tracking-[0.1em]"
               />
             </Field>
-            <Field label="How can we help?" className="sm:col-span-2">
+            <Field label={t("form.message")} className="sm:col-span-2">
               <Textarea
                 name="message"
                 rows={4}
@@ -227,7 +218,7 @@ export default function Contact() {
                 onChange={(e) => setAgreed(e.target.checked)}
                 className="size-4"
               />
-              I agree to the terms and conditions.
+              {t("form.terms")}
             </label>
 
             <Button
@@ -236,7 +227,7 @@ export default function Contact() {
               className="sm:col-span-2"
               disabled={sending}
             >
-              {sending ? "Sending…" : "Send message"}
+              {sending ? t("form.sending") : t("form.submit")}
             </Button>
           </form>
         </div>
@@ -244,28 +235,21 @@ export default function Contact() {
 
       <section className="px-4 pt-16 pb-4 md:px-12">
         <h2 className="m-0 mb-5 text-2xl font-semibold tracking-[-0.03em] md:text-[30px]">
-          Common questions
+          {t("faq.title")}
         </h2>
         <div className="overflow-hidden rounded-card border border-line">
-          {faqs.map((question) => (
+          {faqKeys.map((key) => (
             <button
-              key={question}
-              onClick={() => setOpenFaq(openFaq === question ? null : question)}
-              className="flex w-full cursor-pointer items-center justify-between gap-4 border-b border-line-soft bg-panel px-6 py-5 text-left text-[15px] text-fg transition-colors last:border-b-0 hover:bg-white/3"
+              key={key}
+              onClick={() => setOpenFaq(openFaq === key ? null : key)}
+              className="flex w-full cursor-pointer items-center justify-between gap-4 border-b border-line-soft bg-panel px-6 py-5 text-start text-[15px] text-fg transition-colors last:border-b-0 hover:bg-white/3"
             >
-              {question}
-              <span className="text-faint">
-                {openFaq === question ? "–" : "+"}
-              </span>
+              {t("faq." + key)}
+              <span className="text-faint">{openFaq === key ? "–" : "+"}</span>
             </button>
           ))}
         </div>
-        {openFaq && (
-          <p className="mt-4 text-sm text-dim">
-            Our support desk can answer this directly — call, email or start a
-            chat above and quote your booking reference.
-          </p>
-        )}
+        {openFaq && <p className="mt-4 text-sm text-dim">{t("faq.answer")}</p>}
       </section>
 
       {settings.whatsApp && (
@@ -273,7 +257,7 @@ export default function Contact() {
           href={settings.whatsApp}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed right-6 bottom-24 z-50 flex size-13 items-center justify-center rounded-full bg-success text-ink shadow-[0_16px_36px_-12px_rgba(91,214,166,0.8)] transition-transform hover:scale-105"
+          className="fixed end-6 bottom-24 z-50 flex size-13 items-center justify-center rounded-full bg-success text-ink shadow-[0_16px_36px_-12px_rgba(91,214,166,0.8)] transition-transform hover:scale-105"
           aria-label="WhatsApp"
         >
           <FaWhatsapp className="text-2xl" />

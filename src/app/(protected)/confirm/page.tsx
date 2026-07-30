@@ -2,6 +2,7 @@
 
 import { Suspense, useCallback, useEffect, useState } from "react";
 import moment from "moment";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -18,6 +19,7 @@ import { useToastNotification } from "@/context/toastNotification";
 import Navbar from "@/components/site/navbar";
 import Footer from "@/components/site/footer";
 import Loading from "@/components/common/loading";
+import DownloadTicketButton from "@/components/ticket/downloadTicketButton";
 import { Button, Eyebrow, Pill, StatusDot, Stepper } from "@/components/ui";
 
 const statusTone = (status: string) => {
@@ -27,6 +29,7 @@ const statusTone = (status: string) => {
 };
 
 function ConfirmationBody() {
+  const t = useTranslations("confirm");
   const searchParams = useSearchParams();
   const { addNotification } = useToastNotification();
   const paymentId = searchParams?.get("paymentId");
@@ -77,38 +80,38 @@ function ConfirmationBody() {
   const rows = [
     {
       icon: FaRegIdBadge,
-      label: "Booking ID",
+      key: "bookingId",
       value: payment?.bookingId?.bookingId,
       mono: true,
     },
     {
       icon: FaRegUser,
-      label: "Booked by",
+      key: "bookedBy",
       value: payment?.userId?.fullName || payment?.userId?.email,
     },
     {
       icon: FaRegCreditCard,
-      label: "Payment method",
+      key: "paymentMethod",
       value: payment?.paymentMethod,
     },
     {
       icon: FaRegMoneyBill1,
-      label: "Total price",
+      key: "totalPrice",
       value: `${payment?.currency} ${payment?.amount}`,
     },
     {
       icon: FaRegCalendar,
-      label: "Date booked",
+      key: "dateBooked",
       value: payment && moment(payment.bookingId?.createdAt).calendar(),
     },
     {
       icon: FaRegCalendar,
-      label: "Departure",
+      key: "departure",
       value: flight && moment(flight.departureTime).calendar(),
     },
     {
       icon: FaUsers,
-      label: "Guests",
+      key: "guests",
       value: payment?.bookingId?.travellers?.length,
     },
   ];
@@ -123,12 +126,9 @@ function ConfirmationBody() {
           </Pill>
 
           <h1 className="m-0 mb-2.5 text-3xl font-semibold capitalize md:text-[40px]">
-            {confirming ? "Confirming payment" : `Payment ${status}`}
+            {confirming ? t("confirming") : t("paymentStatus", { status })}
           </h1>
-          <p className="m-0 text-sm leading-relaxed text-dim">
-            Your flight has been booked. We&apos;ll email you as soon as the
-            payment is confirmed.
-          </p>
+          <p className="m-0 text-sm leading-relaxed text-dim">{t("copy")}</p>
 
           {flight && (
             <h2 className="m-0 mt-5 font-display text-xl font-semibold text-accent-bright">
@@ -140,15 +140,15 @@ function ConfirmationBody() {
         <div className="grid hairline-grid sm:grid-cols-2">
           {rows.map((row) => (
             <div
-              key={row.label}
+              key={row.key}
               className="flex items-center justify-between gap-4 bg-panel px-6 py-4"
             >
               <span className="flex items-center gap-2.5 text-[13px] text-dim">
                 <row.icon className="text-faint" />
-                {row.label}
+                {t("rows." + row.key)}
               </span>
               <span
-                className={`text-right text-sm font-medium ${
+                className={`text-end text-sm font-medium ${
                   row.mono ? "font-mono" : ""
                 }`}
               >
@@ -159,14 +159,21 @@ function ConfirmationBody() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line-soft px-6 py-5">
-          <Eyebrow>
-            {confirming
-              ? "This page updates automatically"
-              : "Payment resolved"}
-          </Eyebrow>
-          <Link href="/dashboard/bookings">
-            <Button>Go to my bookings</Button>
-          </Link>
+          <Eyebrow>{confirming ? t("autoUpdates") : t("resolved")}</Eyebrow>
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Only once the payment has actually been approved — a ticket for
+                a rejected payment would be worse than no ticket. */}
+            {status === "successful" && payment?.bookingId && (
+              <DownloadTicketButton
+                booking={payment.bookingId}
+                fare={{ amount: payment.amount, currency: payment.currency }}
+                size="md"
+              />
+            )}
+            <Link href="/dashboard/bookings">
+              <Button>{t("goToBookings")}</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -174,11 +181,18 @@ function ConfirmationBody() {
 }
 
 export default function BookingConfirmation() {
+  const t = useTranslations("confirm");
+
   return (
     <div className="mx-auto w-full max-w-[1440px]">
       <Navbar compact />
       <Stepper
-        steps={["Search", "Passengers & seats", "Payment", "Ticket issued"]}
+        steps={[
+          t("steps.search"),
+          t("steps.passengers"),
+          t("steps.payment"),
+          t("steps.issued"),
+        ]}
         current={4}
       />
       <Suspense

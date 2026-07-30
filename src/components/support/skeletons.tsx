@@ -5,9 +5,9 @@ export const SkeletonConversationLoading: React.FC = () => (
       <div className="h-4 w-24 rounded bg-white/10" />
       <div className="h-3 w-36 rounded bg-white/8" />
     </div>
-    <div className="space-y-2 text-right">
-      <div className="ml-auto h-3 w-16 rounded bg-white/8" />
-      <div className="ml-auto size-5 rounded-full bg-white/10" />
+    <div className="space-y-2 text-end">
+      <div className="ms-auto h-3 w-16 rounded bg-white/8" />
+      <div className="ms-auto size-5 rounded-full bg-white/10" />
     </div>
   </div>
 );

@@ -3,8 +3,6 @@ import dbConnect from "@/utils/dbConnect";
 import Booking from "@/model/booking";
 import Seat from "@/model/seat";
 import corsMiddleware, { isAdmin } from "@/utils/middleware";
-import Flight from "@/model/flight";
-import Airport from "@/model/airport";
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,8 +28,6 @@ export default async function handler(
 const getBookingById = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query;
-    await Flight.find();
-    await Airport.find();
     const booking = await Booking.findOne({ id })
       .populate({
         path: "flightId",

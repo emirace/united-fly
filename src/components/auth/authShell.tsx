@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import IMAGES from "@/lib/images";
 
 /**
@@ -11,12 +14,14 @@ export default function AuthShell({
 }: {
   children: React.ReactNode;
 }) {
+  const t = useTranslations("auth.shell");
+
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.05fr_1fr]">
       <div className="relative hidden overflow-hidden lg:block">
         <Image
           src={IMAGES.hero}
-          alt="Aircraft"
+          alt={t("imageAlt")}
           fill
           priority
           className="object-cover"
@@ -39,11 +44,10 @@ export default function AuthShell({
 
           <div>
             <h2 className="m-0 mb-3.5 max-w-[22ch] text-[40px] leading-[1.06] font-semibold">
-              Every trip, boarding pass and receipt in one place.
+              {t("pitchTitle")}
             </h2>
             <p className="m-0 max-w-[42ch] text-[15px] leading-relaxed text-muted">
-              MileClub members get 2× miles, free seat selection and priority
-              support.
+              {t("pitchCopy")}
             </p>
           </div>
         </div>
@@ -67,7 +71,7 @@ export default function AuthShell({
           {children}
 
           <p className="mt-7 text-center text-xs text-faint">
-            © 2026 United Fly Airlines
+            {t("copyright", { year: 2026 })}
           </p>
         </div>
       </div>

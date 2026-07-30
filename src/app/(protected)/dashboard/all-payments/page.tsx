@@ -5,6 +5,7 @@ import moment from "moment";
 import { FaTrash, FaEye } from "react-icons/fa";
 import { usePayment, IPayment } from "@/context/payment";
 import { IBooking } from "@/context/booking";
+import type { TicketFare } from "@/lib/ticket";
 import { useToastNotification } from "@/context/toastNotification";
 import Loading from "@/components/common/loading";
 import Modal from "@/components/common/modal";
@@ -118,6 +119,7 @@ export default function AllPayments() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [booking, setBooking] = useState<IBooking | null>(null);
+  const [fare, setFare] = useState<TicketFare | null>(null);
   const [image, setImage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -206,6 +208,10 @@ export default function AllPayments() {
                       className="cursor-pointer transition-colors hover:text-fg"
                       onClick={() => {
                         setBooking(payment.bookingId);
+                        setFare({
+                          amount: payment.amount,
+                          currency: payment.currency,
+                        });
                         setImage(payment.image || "");
                         setIsOpen(true);
                       }}
@@ -229,7 +235,7 @@ export default function AllPayments() {
       )}
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <BookingDetails booking={booking} image={image} />
+        <BookingDetails booking={booking} image={image} fare={fare} />
       </Modal>
     </div>
   );
