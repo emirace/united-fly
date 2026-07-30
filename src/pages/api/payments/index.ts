@@ -10,8 +10,6 @@ import corsMiddleware, {
 } from "@/utils/middleware";
 import Seat from "@/model/seat";
 import mongoose from "mongoose";
-import Flight from "@/model/flight";
-import Airport from "@/model/airport";
 
 async function handler(req: AuthenticatedRequest, res: NextApiResponse) {
   await corsMiddleware(req, res);
@@ -154,11 +152,21 @@ const getPayments = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!(await isAdmin(req))) {
       return res.status(403).json({ message: "Forbidden" });
     }
-    await Flight.find();
-    await Airport.find();
+    // The airports and seats are populated one level deeper than they look:
+    // without them the admin booking modal renders "undefined (undefined)" for
+    // the route, and a ticket downloaded from there has no origin or seats.
     const payments = await Payment.find()
       .populate("userId", "-password")
-      .populate({ path: "bookingId", populate: { path: "flightId" } });
+      .populate({
+        path: "bookingId",
+        populate: [
+          {
+            path: "flightId",
+            populate: [{ path: "destination" }, { path: "origin" }],
+          },
+          { path: "seatId" },
+        ],
+      });
 
     res.status(200).json(payments);
   } catch (error) {

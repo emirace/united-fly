@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { IoClose } from "react-icons/io5";
 
 interface ModalProps {
@@ -10,6 +11,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const t = useTranslations("common");
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -40,8 +42,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 cursor-pointer text-faint transition-colors hover:text-fg"
-          aria-label="Close"
+          className="absolute top-4 end-4 cursor-pointer text-faint transition-colors hover:text-fg"
+          aria-label={t("close")}
         >
           <IoClose size={22} />
         </button>
