@@ -61,9 +61,12 @@ const processPayment = async (
 
     try {
       // Check if any of the requested seats are already booked
+      // Only seats still held block a booking; one released by a cancellation
+      // is available again.
       const existingSeats = await Seat.find({
         flightId,
         seatNumber: { $in: seatNumber },
+        isBooked: { $ne: false },
       }).session(session);
 
       if (existingSeats.length > 0) {

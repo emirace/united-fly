@@ -23,15 +23,17 @@ export default async function handler(
 const getAvailableSeats = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query;
-    console.log(id);
-    const seats = await Seat.find({ flightId: id }).sort({
+    // Released seats are back on sale, so they must not come back as taken.
+    // `$ne: false` also matches rows written before the field existed.
+    const seats = await Seat.find({
+      flightId: id,
+      isBooked: { $ne: false },
+    }).sort({
       seatNumber: 1,
     });
 
-    if (!seats.length) {
-      return res.status(404).json({ message: "No available seats found" });
-    }
-
+    // An empty cabin is a valid answer — 404 here made the seat picker treat
+    // "nothing sold yet" as a failed request.
     res.status(200).json(seats);
   } catch (error) {
     res.status(500).json({ message: "Error fetching seats", error });
