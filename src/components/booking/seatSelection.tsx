@@ -24,12 +24,71 @@ export interface ISeat {
 interface FlightSeatSelectionProps {
   totalRows?: number;
   seatsPerRow?: number;
+  /** Share of the cabin shown as taken before real bookings. 0 disables it. */
+  occupancy?: number;
   onSubmit: (selectedSeats: string[]) => void;
 }
+
+/**
+ * djb2 followed by murmur3's finaliser. The mixing step is not optional here:
+ * every input shares the long `<flightId>:` prefix and differs only in the last
+ * two characters, so raw djb2 comes out ordered almost lexicographically —
+ * ranking by it hands back A1, A2, A3… as one solid block at the front of the
+ * cabin, identical on every flight. The avalanche breaks that up.
+ */
+const hash = (value: string) => {
+  let h = 5381;
+  for (let i = 0; i < value.length; i++) {
+    h = ((h << 5) + h + value.charCodeAt(i)) | 0;
+  }
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return h >>> 0;
+};
+
+/**
+ * A flight that has sold two seats renders an empty cabin, which reads as
+ * broken rather than available. This fills it out to `occupancy`.
+ *
+ * Seeding off the flight id is what makes it usable: the same flight shows the
+ * same taken seats on every render, reload and device, so a seat can't turn
+ * grey under a customer who is mid-choice, and two people comparing screens see
+ * the same cabin.
+ *
+ * The filler is derived from the flight alone and real bookings union on top,
+ * rather than being counted against the target. Budgeting them would mean a
+ * seat shown as taken turning free again the moment somebody books elsewhere.
+ */
+const unavailableSeats = (
+  seatIds: string[],
+  bookedNumbers: string[],
+  flightId: string,
+  occupancy: number
+) => {
+  if (occupancy <= 0) return new Set(bookedNumbers);
+
+  // Never fill the whole cabin — there has to be something left to pick.
+  const target = Math.min(
+    Math.round(seatIds.length * occupancy),
+    seatIds.length - 1
+  );
+
+  const filler = seatIds
+    .map((id) => ({ id, rank: hash(`${flightId}:${id}`) }))
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, target)
+    .map((seat) => seat.id);
+
+  return new Set([...bookedNumbers, ...filler]);
+};
 
 const FlightSeatSelection: React.FC<FlightSeatSelectionProps> = ({
   totalRows = 6,
   seatsPerRow = 4,
+  occupancy = 0.55,
   onSubmit,
 }) => {
   const t = useTranslations("booking.seats");
@@ -40,16 +99,27 @@ const FlightSeatSelection: React.FC<FlightSeatSelectionProps> = ({
 
   const bookedNumbers = bookedSeats.map((seat) => seat.seatNumber);
 
-  const seats: Seat[] = [];
+  const seatIds: string[] = [];
   for (let row = 1; row <= totalRows; row++) {
     for (let col = 1; col <= seatsPerRow; col++) {
-      const id = `${String.fromCharCode(65 + row - 1)}${col}`;
-      seats.push({ id, isAvailable: !bookedNumbers.includes(id) });
+      seatIds.push(`${String.fromCharCode(65 + row - 1)}${col}`);
     }
   }
 
+  const takenSeats = unavailableSeats(
+    seatIds,
+    bookedNumbers,
+    formData.flightId,
+    occupancy
+  );
+
+  const seats: Seat[] = seatIds.map((id) => ({
+    id,
+    isAvailable: !takenSeats.has(id),
+  }));
+
   const handleSelect = (seatId: string) => {
-    if (bookedNumbers.includes(seatId)) return;
+    if (takenSeats.has(seatId)) return;
 
     setSelectedSeats((prev) =>
       prev.includes(seatId)
