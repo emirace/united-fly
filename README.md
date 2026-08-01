@@ -21,6 +21,7 @@ Fill in `.env.local`:
 | --- | --- |
 | `MONGO_URI` | MongoDB connection string. Must be a **replica set** — checkout wraps seat/booking/payment creation in a transaction. |
 | `JWT_SECRET` | Signs both account and guest-chat tokens. |
+| `CLOUDINARY_CLOUD_NAME` / `CLOUDINARY_API_KEY` / `CLOUDINARY_API_SECRET` | Credentials for image uploads (chat attachments, payment receipts, profile photos). All three are required or uploads fail. |
 | `EMAIL_USER` / `EMAIL_PASS` | Fallback mailbox for outbound email (the dashboard Settings screen can override it). |
 | `NEXT_PUBLIC_SITE_URL` | Optional. Canonical origin for shareable payment links; derived from the request when unset. |
 
@@ -60,8 +61,13 @@ Anonymous visitors get a **guest** token stored under `chatToken`, never
 customer's email in the widget gives you a support thread of your own and
 nothing else.
 
-Chat attachments are stored in MongoDB and served from `/api/images/:id` rather
-than written to disk, which would not survive a serverless deploy.
+Chat attachments — along with payment receipts and profile photos — are uploaded
+to Cloudinary rather than written to disk, which would not survive a serverless
+deploy. `POST /api/images` takes the multipart file, checks the token, size (5MB)
+and type, hands the bytes to Cloudinary under the `united-fly` folder, and returns
+`{ imageUrl }` with the CDN url that gets persisted on the message or payment.
+Set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in
+`.env.local` or uploads fail.
 
 ## Outbound email
 
