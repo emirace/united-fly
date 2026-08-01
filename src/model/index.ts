@@ -18,7 +18,6 @@ import Booking from "./booking";
 import Conversation from "./conversation";
 import Flight from "./flight";
 import GuestUser from "./guestUser";
-import Image from "./image";
 import Message from "./message";
 import Payment from "./payment";
 import Seat from "./seat";
@@ -32,7 +31,6 @@ const models = {
   Conversation,
   Flight,
   GuestUser,
-  Image,
   Message,
   Payment,
   Seat,
@@ -56,7 +54,6 @@ export {
   Conversation,
   Flight,
   GuestUser,
-  Image,
   Message,
   Payment,
   Seat,

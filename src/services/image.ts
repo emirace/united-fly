@@ -2,9 +2,9 @@ import { getBackendErrorMessage } from "../utils/error";
 import apiChat from "./apiChat";
 
 /**
- * Uploads a chat attachment and returns the path it is served from
- * (`/api/images/<id>`). `apiChat` unwraps to `response.data`, so the cast is
- * against the endpoint's payload rather than an Axios response.
+ * Uploads a chat attachment and returns the Cloudinary url it is served from.
+ * `apiChat` unwraps to `response.data`, so the cast is against the endpoint's
+ * payload rather than an Axios response.
  */
 export const saveImageService = async (formData: FormData): Promise<string> => {
   try {
