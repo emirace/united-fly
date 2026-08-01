@@ -1,0 +1,660 @@
+{
+  "common": {
+    "changeLanguage": "言語を変更",
+    "cabins": {
+      "economy": "エコノミー",
+      "premiumEconomy": "プレミアムエコノミー",
+      "business": "ビジネス",
+      "firstClass": "ファースト"
+    },
+    "close": "閉じる"
+  },
+  "nav": {
+    "book": "予約",
+    "trackFlight": "フライト照会",
+    "myTrips": "マイトリップ",
+    "help": "ヘルプ",
+    "profile": "プロフィール",
+    "bookings": "予約一覧",
+    "track": "照会",
+    "signIn": "ログイン",
+    "signOut": "ログアウト",
+    "joinMileClub": "MileClubに登録",
+    "join": "登録",
+    "menu": "メニュー",
+    "accountMenu": "アカウントメニュー"
+  },
+  "footer": {
+    "blurb": "IATA公認の旅行事業者です。表示運賃には税金と航空会社手数料が含まれます。",
+    "language": "言語",
+    "copyright": "© {year} United Fly Airlines. 無断複写・転載を禁じます。",
+    "book": {
+      "title": "予約",
+      "flightSearch": "フライト検索",
+      "popularRoutes": "人気路線",
+      "groupBookings": "団体予約",
+      "routeMap": "路線図"
+    },
+    "manage": {
+      "title": "管理",
+      "trackBooking": "予約を照会",
+      "myTrips": "マイトリップ",
+      "payments": "お支払い",
+      "profile": "プロフィール"
+    },
+    "company": {
+      "title": "会社情報",
+      "about": "会社概要",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "contact": "お問い合わせ"
+    }
+  },
+  "search": {
+    "oneWay": "片道",
+    "roundTrip": "往復",
+    "from": "出発地",
+    "to": "到着地",
+    "depart": "往路",
+    "return": "復路",
+    "travellers": "搭乗者",
+    "selectOrigin": "出発地を選択",
+    "selectDestination": "到着地を選択",
+    "selectDate": "日付を選択",
+    "selectClass": "クラスを選択",
+    "submit": "フライトを検索 →",
+    "included": "込み",
+    "travellerCount": "{count, plural, other {搭乗者#名}}",
+    "perks": {
+      "hold": "24時間無料キープ",
+      "taxes": "税込運賃",
+      "noCard": "カード不要で検索"
+    },
+    "errors": {
+      "origin": "出発地を選択してください。",
+      "destination": "到着地を選択してください。",
+      "date": "出発日を選択してください。",
+      "cabin": "座席クラスを選択してください。",
+      "travellers": "搭乗者数を選択してください。"
+    }
+  },
+  "home": {
+    "hero": {
+      "onTime": "定時運航率 94.2% · 2026年6月",
+      "title": "いつでも、飛び立てます。",
+      "subtitle": "630都市、運賃は一画面に、追加料金なし。空席をリアルタイムで検索し、24時間無料で座席をキープできます。"
+    },
+    "stats": {
+      "destinations": "就航都市数",
+      "hold": "カード不要の無料座席キープ",
+      "accredited": "公認・保証済み",
+      "reviews": "18,402件の認証済みレビュー"
+    },
+    "popular": {
+      "eyebrow": "いま選ばれている行き先",
+      "title": "今シーズンの人気",
+      "all": "630都市すべて",
+      "from": "〜から",
+      "fillingFast": "残席わずか"
+    },
+    "destinations": {
+      "thailand": {
+        "name": "タイ",
+        "info": "次の出発 12月26日 · 2回乗継"
+      },
+      "hongKong": {
+        "name": "香港",
+        "info": "毎日運航 · 1回乗継"
+      },
+      "maldives": {
+        "name": "モルディブ",
+        "info": "週2便 · 1回乗継"
+      },
+      "switzerland": {
+        "name": "スイス",
+        "info": "次の空席 10月2日 · 直行"
+      }
+    },
+    "steps": {
+      "eyebrow": "3ステップ",
+      "title": "2分以内で予約完了",
+      "copy": "検索にアカウントは不要です。お支払い時に作成すれば、予約・搭乗券・払い戻しをまとめて管理できます。",
+      "cta": "検索をはじめる",
+      "search": {
+        "title": "リアルタイム運賃を検索",
+        "copy": "630都市の実際の空席状況 — おとり価格はありません。"
+      },
+      "seat": {
+        "title": "座席と運賃を選択",
+        "copy": "クラスを並べて比較し、シートマップから座席を選べます。"
+      },
+      "pay": {
+        "title": "お好みの方法でお支払い",
+        "copy": "カード、銀行振込、モバイル送金、暗号資産 — チケットは即時発行されます。"
+      }
+    },
+    "cta": {
+      "title": "さあ、旅に出よう",
+      "copy": "MileClubに登録すると、今四半期は全路線でマイル2倍。変更無料、座席指定無料、予定が変わったときも優先サポートをご利用いただけます。",
+      "join": "MileClubに登録",
+      "book": "フライトを予約"
+    }
+  },
+  "listing": {
+    "steps": {
+      "search": "検索",
+      "review": "確認",
+      "passengers": "搭乗者",
+      "payment": "お支払い"
+    },
+    "sort": {
+      "best": "おすすめ",
+      "cheapest": "最安",
+      "fastest": "最速"
+    },
+    "bestValue": "お得",
+    "terminal": "ターミナル{number}",
+    "direct": "直行",
+    "cabinBag": "手荷物込み",
+    "perAdult": "大人1名あたり、総額",
+    "selectFlight": "このフライトを選択",
+    "seatsLeft": "{count, plural, other {この運賃は残り#席です}}",
+    "refundable": "払い戻し可 · 24時間経過後は手数料がかかります",
+    "anyDate": "日付指定なし",
+    "adultCount": "{count, plural, other {大人#名}}",
+    "close": "閉じる",
+    "edit": "変更",
+    "updateSearch": "検索を更新 →",
+    "flightsAvailable": "{count, plural, other {#件のフライト}}",
+    "allDates": "すべての日付",
+    "pricesInclude": "税・手数料込みの価格",
+    "empty": {
+      "title": "該当なし",
+      "copy": "この路線と日付に合うフライトがありません。検索条件を変えてお試しください。"
+    }
+  },
+  "booking": {
+    "steps": {
+      "search": "検索",
+      "passengers": "搭乗者と座席",
+      "payment": "お支払い",
+      "issued": "チケット発行"
+    },
+    "itinerary": "旅程 · {flight}",
+    "seatsAvailable": "{count, plural, other {残り#席}}",
+    "flightIncludes": "{flight}便 · 機内食と23kgの受託手荷物込み",
+    "travellerDetails": "搭乗者情報",
+    "new": "新規",
+    "nameNotice": "パスポートの表記どおりに氏名を入力してください。",
+    "sendTo": "予約内容の送信先",
+    "mobile": "携帯電話番号",
+    "email": "メールアドレス",
+    "beforeContinue": "お進みになる前に",
+    "important": {
+      "names": "氏名はパスポートと完全に一致している必要があります。発券後の変更には60ドルかかります。",
+      "entry": "入国条件は渡航先によって異なります。ご出発前にビザの要件をご確認ください。",
+      "cancellation": "ご予約から24時間以内は無料でキャンセルできます。それ以降は手数料がかかります。",
+      "baggage": "受託手荷物23kg1個と手荷物7kg1個がこの運賃に含まれます。"
+    },
+    "fare": {
+      "title": "運賃内訳",
+      "baseFare": "基本運賃 × {count}",
+      "taxes": "税・航空会社手数料",
+      "seat": "座席指定",
+      "bag": "受託手荷物23kg",
+      "included": "込み",
+      "total": "お支払い総額"
+    },
+    "continueToSeats": "座席選択へ進む",
+    "noChargeYet": "最終ステップまで請求は発生しません。",
+    "cancellation": {
+      "title": "キャンセル",
+      "copy": "払い戻し可 — 手数料は出発までの日数によって変わります。"
+    },
+    "errors": {
+      "email": "メールアドレスを入力してください",
+      "phone": "携帯電話番号を入力してください"
+    },
+    "passenger": {
+      "heading": "搭乗者{number} · 大人",
+      "title": "敬称",
+      "titles": {
+        "mr": "Mr",
+        "mrs": "Mrs",
+        "ms": "Ms",
+        "dr": "Dr"
+      },
+      "firstName": "名",
+      "firstNamePlaceholder": "パスポートの表記どおり",
+      "lastName": "姓",
+      "lastNamePlaceholder": "姓",
+      "dob": "生年月日",
+      "month": "月",
+      "months": {
+        "january": "1月",
+        "february": "2月",
+        "march": "3月",
+        "april": "4月",
+        "may": "5月",
+        "june": "6月",
+        "july": "7月",
+        "august": "8月",
+        "september": "9月",
+        "october": "10月",
+        "november": "11月",
+        "december": "12月"
+      },
+      "nationality": "国籍",
+      "passportCountry": "パスポート発行国",
+      "passportNumber": "パスポート番号",
+      "passportHint": "有効なパスポート番号を入力してください。予約確定に影響する場合があります。",
+      "passportExpiry": "パスポート有効期限",
+      "searchCountry": "国を検索",
+      "addTraveller": "＋ 搭乗者を追加"
+    },
+    "seats": {
+      "heading": "座席をお選びください",
+      "selected": "選択中",
+      "free": "空席",
+      "taken": "予約済み",
+      "chosen": "{count, plural, other {座席 {seats}}}",
+      "none": "座席が未選択です",
+      "includedHint": "運賃に含まれています — 座席指定料はかかりません。",
+      "pickHint": "お支払いに進むには座席を1つ以上お選びください。",
+      "proceed": "お支払いへ進む"
+    }
+  },
+  "payment": {
+    "steps": {
+      "search": "検索",
+      "passengers": "搭乗者と座席",
+      "payment": "お支払い",
+      "issued": "チケット発行"
+    },
+    "secureCheckout": "安全なお支払い · PCI DSS",
+    "title": "お支払い方法をお選びください",
+    "seatsHeld": "お支払いの間、座席はキープされています",
+    "seatsHeldFor": "{count, plural, other {座席 {seats} をキープしています}}",
+    "proceed": "進む",
+    "noChargeNotice": "確定するまで請求は発生しません",
+    "methods": {
+      "mobile": {
+        "title": "モバイル送金",
+        "copy": "モバイルバンキングから安全に送金できます。"
+      },
+      "bank": {
+        "title": "銀行振込",
+        "copy": "銀行口座から安全に送金できます。"
+      },
+      "card": {
+        "title": "クレジット / デビットカード",
+        "copy": "Visa、Mastercard、Verveで即時にお支払いいただけます。"
+      },
+      "crypto": {
+        "title": "暗号資産",
+        "copy": "Bitcoin、Ethereumなどの暗号資産でお支払いいただけます。"
+      },
+      "cashapp": {
+        "title": "Cash App",
+        "copy": "お支払い金額を当社のCash Appタグへ送金してください。"
+      }
+    },
+    "shared": {
+      "copied": "クリップボードにコピーしました",
+      "copyFailed": "コピーできませんでした",
+      "copy": "コピー"
+    },
+    "summary": {
+      "title": "運賃内訳",
+      "baseFare": "基本運賃",
+      "discount": "割引",
+      "otherServices": "その他のサービス",
+      "total": "お支払い総額",
+      "yourBooking": "ご予約内容",
+      "travellers": "搭乗者",
+      "adult": "大人",
+      "seats": "座席 {seats}",
+      "reviewBooking": "予約を確認"
+    },
+    "card": {
+      "unavailable": "利用不可",
+      "notAvailable": "現在カード決済はご利用いただけません。",
+      "chooseAnother": "別のお支払い方法をお選びください。"
+    },
+    "mobile": {
+      "title": "モバイル送金",
+      "copy": "記載の口座情報へお振込みください。",
+      "accountNumber": "口座番号",
+      "accountName": "口座名義",
+      "routing": "ルーティング番号",
+      "address": "住所",
+      "bankName": "銀行名",
+      "refreshIn": "情報の更新まで",
+      "confirmWarning": "送金が完了した場合のみ確定してください",
+      "madePayment": "支払いを完了しました（{amount}）",
+      "backToMethods": "お支払い方法に戻る",
+      "seatsHeld": "お支払いの間、座席はキープされています",
+      "settingsError": "設定の読み込み中にエラーが発生しました。"
+    },
+    "bank": {
+      "title": "銀行振込",
+      "copy": "下記の安全なお支払いリンクを開いて送金を完了してください。",
+      "generating": "お支払いリンクを作成中",
+      "makePayment": "支払う（{amount}）",
+      "paymentLink": "お支払いリンク"
+    },
+    "cashApp": {
+      "title": "Cash App",
+      "copy": "お支払い金額を下記のタグへ送金してください。",
+      "amountDue": "お支払い金額",
+      "name": "名前",
+      "cashTag": "Cashタグ",
+      "timeLeft": "お支払い残り時間",
+      "madePayment": "支払いを完了しました（{amount}）",
+      "settingsError": "設定の読み込み中にエラーが発生しました。"
+    },
+    "crypto": {
+      "title": "暗号資産でお支払い",
+      "selectCoin": "通貨を選択",
+      "selectPlaceholder": "暗号資産を選択",
+      "sendWarning": "お支払い金額を下記のアドレスへ送金してください。このアドレスには{coin}のみをお送りください。",
+      "amountDue": "お支払い金額",
+      "walletAddress": "ウォレットアドレス",
+      "network": "ネットワーク",
+      "timeLeft": "お支払い残り時間",
+      "madePayment": "支払いを完了しました（{amount}）",
+      "settingsError": "設定の読み込み中にエラーが発生しました。"
+    },
+    "token": {
+      "route": "区間",
+      "flight": "便名",
+      "departs": "出発",
+      "arrives": "到着",
+      "class": "クラス",
+      "accountNumber": "口座番号",
+      "accountName": "口座名義",
+      "bankName": "銀行名",
+      "routing": "ルーティング番号",
+      "address": "住所",
+      "receiptUploaded": "領収書をアップロードしました",
+      "receiptFailed": "画像のアップロードに失敗しました"
+    }
+  },
+  "confirm": {
+    "steps": {
+      "search": "検索",
+      "passengers": "搭乗者と座席",
+      "payment": "お支払い",
+      "issued": "チケット発行"
+    },
+    "confirming": "お支払いを確認しています",
+    "paymentStatus": "お支払い {status}",
+    "copy": "フライトのご予約が完了しました。お支払いが確認でき次第、メールでお知らせします。",
+    "rows": {
+      "bookingId": "予約番号",
+      "bookedBy": "予約者",
+      "paymentMethod": "お支払い方法",
+      "totalPrice": "合計金額",
+      "dateBooked": "予約日",
+      "departure": "出発",
+      "guests": "人数"
+    },
+    "autoUpdates": "このページは自動で更新されます",
+    "resolved": "お支払い処理済み",
+    "goToBookings": "予約一覧へ"
+  },
+  "tracking": {
+    "title": "フライトの現在地は？",
+    "subtitle": "予約番号を入力してください。アカウントは不要です。",
+    "submit": "予約を照会",
+    "searching": "検索中…",
+    "ref": "予約番号 {reference}",
+    "departs": "出発 {time}",
+    "arrives": "到着 {time}",
+    "flightNumber": "{flight}便",
+    "status": "ステータス {status}",
+    "travellers": "搭乗者",
+    "noTravellers": "搭乗者情報は登録されていません",
+    "payment": "お支払い",
+    "booked": "予約日 {date}",
+    "seats": "座席",
+    "noSeats": "座席は未指定です",
+    "supportPrompt": "ご予約についてご不明な点は、24時間365日サポートへ。",
+    "contactSupport": "サポートに問い合わせる",
+    "errors": {
+      "reference": "予約番号を入力してください。",
+      "notFound": "予約が見つかりませんでした。"
+    }
+  },
+  "contact": {
+    "eyebrow": "サポート · 24時間365日",
+    "title": "順番待ちではなく、人と話せます。",
+    "subtitle": "初回返信は平均4分以内。時間帯も時差も問いません。",
+    "imageAlt": "旅行者",
+    "sent": "メッセージを送信しました。まもなくご連絡します。",
+    "call": {
+      "label": "電話",
+      "title": "窓口に相談する",
+      "copy": "当日の変更やキャンセルに最適です。"
+    },
+    "email": {
+      "label": "メール",
+      "title": "詳細を送る",
+      "copy": "払い戻し、領収書、書類のご相談に。"
+    },
+    "chat": {
+      "label": "チャット",
+      "title": "ライブチャットとWhatsApp",
+      "copy": "どの端末からでも会話を続けられます。",
+      "online": "対応中のスタッフがいます"
+    },
+    "form": {
+      "title": "メッセージを送る",
+      "name": "お名前",
+      "email": "メールアドレス",
+      "mobile": "携帯電話番号",
+      "reference": "予約番号（任意）",
+      "message": "ご用件をお聞かせください",
+      "terms": "利用規約に同意します。",
+      "submit": "送信する",
+      "sending": "送信中…"
+    },
+    "faq": {
+      "title": "よくあるご質問",
+      "nameChange": "チケットの氏名は変更できますか？",
+      "refunds": "払い戻しにはどのくらいかかりますか？",
+      "baggage": "運賃にはどの手荷物が含まれますか？",
+      "visa": "乗り継ぎにビザは必要ですか？",
+      "answer": "サポート窓口が直接お答えします。上記の電話・メール・チャットから、予約番号をお伝えください。"
+    },
+    "errors": {
+      "required": "お名前、メールアドレス、メッセージは必須です。",
+      "terms": "利用規約に同意してください。"
+    }
+  },
+  "auth": {
+    "shell": {
+      "imageAlt": "航空機",
+      "pitchTitle": "旅程も搭乗券も領収書も、ひとつの場所に。",
+      "pitchCopy": "MileClub会員はマイル2倍、座席指定無料、優先サポートをご利用いただけます。",
+      "copyright": "© {year} United Fly Airlines"
+    },
+    "login": {
+      "title": "おかえりなさい",
+      "newHere": "はじめてですか？",
+      "createAccount": "アカウントを作成",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "rememberMe": "ログイン状態を保持",
+      "submit": "ログイン",
+      "or": "または",
+      "trackWithoutSignIn": "ログインせずに予約を照会",
+      "errors": {
+        "email": "メールアドレスを入力してください",
+        "password": "パスワードを入力してください"
+      }
+    },
+    "signup": {
+      "title": "MileClubに登録",
+      "alreadyMember": "すでに会員ですか？",
+      "signIn": "ログイン",
+      "fullName": "氏名",
+      "fullNamePlaceholder": "Ada Okonkwo",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "passwordPlaceholder": "8文字以上",
+      "confirmPassword": "パスワードの確認",
+      "confirmPasswordPlaceholder": "同じパスワードを入力",
+      "submit": "アカウントを作成",
+      "errors": {
+        "email": "有効なメールアドレスを入力してください",
+        "password": "パスワードは8文字以上で入力してください",
+        "confirmPassword": "パスワードが一致しません"
+      }
+    }
+  },
+  "support": {
+    "title": "サポート",
+    "greeting": "{name}さん、こんにちは",
+    "there": "ゲスト",
+    "replyTime": "約4分で返信",
+    "open": "サポートを開く",
+    "close": "サポートを閉じる",
+    "back": "戻る",
+    "adminNotice": "管理者はダッシュボードの受信箱からサポートに対応します。",
+    "faq": {
+      "title": "よくあるご質問",
+      "searchPlaceholder": "質問を検索",
+      "questions": {
+        "nameChange": "チケットの氏名は変更できますか？",
+        "refunds": "払い戻しにはどのくらいかかりますか？",
+        "baggage": "運賃にはどの手荷物が含まれますか？",
+        "visa": "乗り継ぎにビザは必要ですか？"
+      },
+      "noMatch": "該当する質問がありません — メッセージをお送りください。",
+      "startTitle": "会話をはじめる",
+      "startCopy": "できるだけ早く、通常は2時間以内に返信します。",
+      "startCta": "メッセージを送る"
+    },
+    "form": {
+      "intro": "お名前をお知らせいただければ、どの端末からでも会話を続けられます。",
+      "fullName": "氏名",
+      "fullNamePlaceholder": "Ada Okonkwo",
+      "email": "メールアドレス",
+      "continue": "続ける",
+      "starting": "開始しています…",
+      "errors": {
+        "fullName": "氏名を入力してください",
+        "email": "メールアドレスを入力してください"
+      }
+    },
+    "chat": {
+      "empty": "お気軽にメッセージをどうぞ — まもなく担当者が対応します。",
+      "placeholder": "メッセージを入力…",
+      "send": "送信",
+      "sending": "送信中",
+      "failed": "失敗",
+      "retry": "再試行",
+      "imageUploaded": "画像をアップロードしました",
+      "imageFailed": "画像のアップロードに失敗しました"
+    }
+  },
+  "dashboard": {
+    "nav": {
+      "profile": "プロフィール",
+      "bookings": "予約一覧",
+      "payments": "お支払い",
+      "signOut": "ログアウト",
+      "menu": "ダッシュボードメニュー",
+      "closeMenu": "メニューを閉じる"
+    },
+    "bookings": {
+      "title": "ご予約一覧",
+      "subtitle": "全{total}件 · {status} {shown}件",
+      "bookFlight": "フライトを予約",
+      "tabs": {
+        "pending": "保留中",
+        "confirmed": "今後の予定",
+        "cancelled": "キャンセル済み",
+        "completed": "完了"
+      },
+      "manage": "予約を管理",
+      "departure": "出発",
+      "arrival": "到着",
+      "seats": "座席",
+      "empty": {
+        "title": "該当なし",
+        "copy": "{status}の予約はありません。"
+      }
+    },
+    "payments": {
+      "title": "お支払い",
+      "subtitle": "すべての予約の領収書",
+      "searchPlaceholder": "取引IDで検索"
+    }
+  },
+  "bookingDetail": {
+    "booking": "予約",
+    "status": "ステータス",
+    "paymentStatus": "支払いステータス",
+    "class": "クラス",
+    "created": "作成日",
+    "flight": "フライト",
+    "flightNumber": "便名",
+    "origin": "出発地",
+    "destination": "到着地",
+    "departure": "出発",
+    "arrival": "到着",
+    "flightStatus": "運航状況",
+    "seats": "座席",
+    "seatNumbered": "座席{number}",
+    "noSeats": "割り当てなし",
+    "receipt": "支払い領収書",
+    "travellers": "搭乗者",
+    "name": "氏名",
+    "dob": "生年月日",
+    "nationality": "国籍",
+    "passport": "パスポート",
+    "issuingCountry": "発行国",
+    "expiry": "有効期限"
+  },
+  "ticket": {
+    "download": "チケットをダウンロード",
+    "preparing": "準備中…",
+    "error": "チケットを作成できませんでした。もう一度お試しください。",
+    "docType": "Eチケット",
+    "bookingRef": "予約番号",
+    "flightNumber": "便名",
+    "cabin": "クラス",
+    "departure": "出発",
+    "arrival": "到着",
+    "duration": "所要時間",
+    "status": "ステータス",
+    "statuses": {
+      "pending": "保留中",
+      "confirmed": "確定",
+      "cancelled": "キャンセル済み",
+      "checkedIn": "チェックイン済み",
+      "completed": "完了"
+    },
+    "passengers": "搭乗者",
+    "passengerName": "搭乗者",
+    "seat": "座席",
+    "seatsSummary": "この予約の座席: {seats}",
+    "noSeat": "この予約に搭乗者はいません。",
+    "totalPaid": "お支払い総額",
+    "scanAtCheckIn": "チェックイン時にスキャン",
+    "issued": "発行日 {date}",
+    "notesTitle": "手荷物とチェックイン",
+    "notes": {
+      "checkIn": "オンラインチェックインは出発24時間前に開始し、90分前に締め切ります。",
+      "airport": "国際線は3時間前、国内線は2時間前までに空港へお越しください。",
+      "carryOn": "7kgまでの手荷物1個（55×40×20cm）と身の回り品1個が含まれます。",
+      "checked": "受託手荷物: エコノミーとプレミアムエコノミーは23kg×1個、ビジネスとファーストは32kg×2個。",
+      "documents": "ご予約時に使用したパスポートまたは身分証をご持参ください。氏名はこのチケットと完全に一致している必要があります。",
+      "gate": "搭乗は出発20分前に締め切ります。ゲート番号は空港の案内表示でご確認ください。"
+    },
+    "disclaimer": "この書類はご予約を証明するものです。搭乗券ではありません — 搭乗券はチェックイン時にお受け取りください。",
+    "support": "unitedfly.com/support"
+  }
+}

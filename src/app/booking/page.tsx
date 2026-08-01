@@ -24,11 +24,14 @@ import {
   Pill,
   Stepper,
 } from "@/components/ui";
+import { cn } from "@/lib/cn";
+import { useLatinEyebrow } from "@/lib/eyebrow";
 
 const importantInfoKeys = ["names", "entry", "cancellation", "baggage"] as const;
 
 export default function Booking() {
   const t = useTranslations("booking");
+  const latinEyebrow = useLatinEyebrow();
   const tc = useTranslations("common");
   const { getFlight, formData, updateFormData } = useFlight();
   const { user } = useUser();
@@ -175,7 +178,12 @@ export default function Booking() {
               <Panel className="p-6">
                 <Eyebrow className="mb-5">{t("travellerDetails")}</Eyebrow>
                 <div className="mb-5 flex items-center gap-3 rounded-control border border-gold/35 bg-gold/10 px-4 py-3 text-[13px] text-gold">
-                  <span className="rounded bg-gold/25 px-2 py-0.5 text-[10px] font-semibold tracking-[0.08em] uppercase">
+                  <span
+                    className={cn(
+                      "rounded bg-gold/25 px-2 py-0.5 text-[10px] font-semibold",
+                      latinEyebrow && "tracking-[0.08em] uppercase"
+                    )}
+                  >
                     {t("new")}
                   </span>
                   {t("nameNotice")}

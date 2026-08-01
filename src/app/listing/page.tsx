@@ -14,6 +14,7 @@ import SearchPanel from "@/components/home/searchPanel";
 import Loading from "@/components/common/loading";
 import { Button, Eyebrow, Stepper } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { useLatinEyebrow } from "@/lib/eyebrow";
 
 type SortKey = "best" | "cheapest" | "fastest";
 
@@ -21,6 +22,7 @@ const sortKeys: SortKey[] = ["best", "cheapest", "fastest"];
 
 function FlightCard({ flight, index }: { flight: IFlight; index: number }) {
   const t = useTranslations("listing");
+  const latinEyebrow = useLatinEyebrow();
   const tc = useTranslations("common");
   const { formData, updateFormData } = useFlight();
   const router = useRouter();
@@ -43,7 +45,12 @@ function FlightCard({ flight, index }: { flight: IFlight; index: number }) {
     >
       <div className="flex flex-wrap items-center gap-3 border-b border-line-soft px-6 py-2.5">
         {best && (
-          <span className="rounded-full bg-accent px-2.5 py-1 text-[10px] font-semibold tracking-[0.1em] text-white uppercase">
+          <span
+            className={cn(
+              "rounded-full bg-accent px-2.5 py-1 text-[10px] font-semibold text-white",
+              latinEyebrow && "tracking-[0.1em] uppercase"
+            )}
+          >
             {t("bestValue")}
           </span>
         )}

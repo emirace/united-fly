@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { QRCodeCanvas } from "qrcode.react";
 import IMAGES from "@/lib/images";
 import { cabinKeyFor } from "@/lib/cabins";
-import { dirFor, type Locale } from "@/i18n/config";
+import { dirFor, usesLatinEyebrow, type Locale } from "@/i18n/config";
 import type { TicketData } from "@/lib/ticket";
 
 /**
@@ -78,37 +78,34 @@ const Ltr = ({
 );
 
 /**
- * The small label style, which has to change shape for Arabic.
- *
- * Letter-spacing is a Latin device, and applying it to Arabic breaks the
- * script's contextual joining — html2canvas then falls back to positioning
- * each character individually, which drops the definite article's alef and
- * mangles ligatures ("المسافرون" came out as gibberish). Uppercasing is
- * meaningless for a script with no case. So RTL gets plain sans at normal
- * tracking, which is also simply correct Arabic typography.
+ * The small label style. Non-Latin scripts drop the mono face, the uppercasing
+ * and the tracking — see `nonLatinLocales` in i18n/config.ts. On the ticket the
+ * stakes are higher than on screen: html2canvas responds to letter-spacing by
+ * positioning each character individually, which mangled Arabic ligatures
+ * outright and spread Japanese labels into 手 荷 物.
  */
-const micro = (rtl: boolean): React.CSSProperties =>
-  rtl
-    ? { fontFamily: SANS, fontSize: 10.5, fontWeight: 500 }
-    : {
+const micro = (latin: boolean): React.CSSProperties =>
+  latin
+    ? {
         fontFamily: MONO,
         fontSize: 9,
         letterSpacing: "0.16em",
         textTransform: "uppercase",
-      };
+      }
+    : { fontFamily: SANS, fontSize: 10.5, fontWeight: 500 };
 
 const Label = ({
   children,
   align,
-  rtl,
+  latin,
 }: {
   children: React.ReactNode;
   align: "left" | "right";
-  rtl: boolean;
+  latin: boolean;
 }) => (
   <div
     style={{
-      ...micro(rtl),
+      ...micro(latin),
       color: C.dim,
       textAlign: align,
       marginBottom: 4,
@@ -129,6 +126,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
     const tc = useTranslations("common");
 
     const rtl = dirFor(locale) === "rtl";
+    const latin = usesLatinEyebrow(locale);
     const start = rtl ? "right" : "left";
     const end = rtl ? "left" : "right";
 
@@ -201,7 +199,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
               </div>
               <div
                 style={{
-                  ...micro(rtl),
+                  ...micro(latin),
                   color: C.onDarkDim,
                   marginTop: 2,
                 }}
@@ -214,7 +212,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
           <div style={{ textAlign: end }}>
             <div
               style={{
-                ...micro(rtl),
+                ...micro(latin),
                 color: C.onDarkDim,
                 marginBottom: 3,
               }}
@@ -343,7 +341,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
                   borderBottom: `1px solid ${C.rule}`,
                 }}
               >
-                <Label align={start} rtl={rtl}>{fact.label}</Label>
+                <Label align={start} latin={latin}>{fact.label}</Label>
                 <div
                   style={{
                     fontSize: 13,
@@ -359,7 +357,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
 
           {/* ---------------------------------------------- passengers --- */}
           <div style={{ marginTop: 22 }}>
-            <Label align={start} rtl={rtl}>{t("passengers")}</Label>
+            <Label align={start} latin={latin}>{t("passengers")}</Label>
             <div style={{ borderTop: `1px solid ${C.rule}` }}>
               <div
                 style={{
@@ -367,7 +365,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
                   justifyContent: "space-between",
                   padding: "8px 0",
                   borderBottom: `1px solid ${C.rule}`,
-                  ...micro(rtl),
+                  ...micro(latin),
                   color: C.dim,
                 }}
               >
@@ -430,7 +428,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
             <div>
               {data.fare && (
                 <>
-                  <Label align={start} rtl={rtl}>{t("totalPaid")}</Label>
+                  <Label align={start} latin={latin}>{t("totalPaid")}</Label>
                   <Ltr
                     style={{
                       display: "block",
@@ -474,7 +472,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
               <div
                 style={{
                   marginTop: 6,
-                  ...micro(rtl),
+                  ...micro(latin),
                   color: C.dim,
                 }}
               >
@@ -485,7 +483,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
 
           {/* --------------------------------------------------- notes --- */}
           <div style={{ marginTop: 22 }}>
-            <Label align={start} rtl={rtl}>{t("notesTitle")}</Label>
+            <Label align={start} latin={latin}>{t("notesTitle")}</Label>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
               {notes.map((note, index) => (
                 <div
@@ -527,7 +525,7 @@ const TicketDocument = React.forwardRef<HTMLDivElement, TicketDocumentProps>(
               marginTop: 20,
               paddingTop: 12,
               borderTop: `1px solid ${C.rule}`,
-              ...micro(rtl),
+              ...micro(latin),
               color: C.dim,
             }}
           >

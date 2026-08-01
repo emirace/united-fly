@@ -130,7 +130,7 @@ renders without the fare block.
 
 ## Languages
 
-The site ships in English, French and Arabic. The visitor's choice lives in a
+The site ships in English, French, German, Japanese and Arabic. The visitor's choice lives in a
 `LOCALE` cookie — URLs are unchanged — so the server renders the right language
 on the first paint with no flash of English. A first-time visitor is matched
 against `Accept-Language` before falling back to English.
@@ -169,6 +169,14 @@ those imports are written out statically so the bundler can resolve them.
 Right-to-left languages work without per-screen effort: `dir` is set from
 `rtlLocales`, and the customer-facing components use logical Tailwind utilities
 (`ms-`/`me-`, `ps-`/`pe-`, `start-`/`end-`) rather than physical ones.
+
+The design opens most sections with a small mono, uppercase, letter-spaced
+label. All three of those are Latin devices, so locales listed in
+`nonLatinLocales` drop them and get a slightly larger sans label instead —
+letter-spacing breaks Arabic's contextual joining outright, and merely looks
+wrong spread across Japanese glyphs. `useLatinEyebrow()` in
+[`src/lib/eyebrow.ts`](src/lib/eyebrow.ts) is the hook; a new locale written in
+Latin script needs no entry.
 
 Not translated, by design: API error messages, database content (airport and
 city names, the payment details from Settings), the admin dashboard, and prices

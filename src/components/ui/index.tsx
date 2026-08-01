@@ -2,10 +2,17 @@
 
 import React from "react";
 import { cn } from "@/lib/cn";
+import { useLatinEyebrow } from "@/lib/eyebrow";
 
 /* ------------------------------------------------------------------ *
  * Eyebrow — the small uppercase mono label that opens nearly every
  * section and card in the design.
+ *
+ * Arabic and Japanese drop the mono face, the uppercasing and the
+ * tracking: all three are Latin devices, and letter-spacing in
+ * particular breaks Arabic's contextual joining. They get a slightly
+ * larger sans label instead, since CJK and Arabic are hard to read at
+ * 10px.
  * ------------------------------------------------------------------ */
 
 export function Eyebrow({
@@ -15,10 +22,15 @@ export function Eyebrow({
   children: React.ReactNode;
   className?: string;
 }) {
+  const latin = useLatinEyebrow();
+
   return (
     <div
       className={cn(
-        "font-mono text-[10px] uppercase tracking-[0.16em] text-faint",
+        "text-faint",
+        latin
+          ? "font-mono text-[10px] uppercase tracking-[0.16em]"
+          : "text-[11px]",
         className
       )}
     >
