@@ -71,7 +71,9 @@ export default function BookingPayment() {
         "Uploaded Payment Receipt"
       ).catch(() => {});
 
-      router.push(`/confirm?paymentId=${paymentId}`);
+      // `paymentId` here is the pay-by-link JWT, not an ObjectId — /confirm
+      // looks the payment up by id, so send the one the update just returned.
+      router.push(`/confirm?paymentId=${res._id}`);
     } catch (error) {
       addNotification({ message: error as string, error: true });
     } finally {

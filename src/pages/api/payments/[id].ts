@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import mongoose from "mongoose";
 import dbConnect from "@/utils/dbConnect";
 import Payment from "@/model/payment";
 import corsMiddleware from "@/utils/middleware";
@@ -32,6 +33,12 @@ export default async function handler(
 const getPaymentById = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query;
+    // Anything that isn't an ObjectId would otherwise reach Mongoose and come
+    // back as a CastError 500 — a pay-by-link token pasted here, most often.
+    if (!mongoose.Types.ObjectId.isValid(String(id))) {
+      return res.status(400).json({ message: "Invalid payment id" });
+    }
+
     // Seats come along because the confirmation screen offers a PDF ticket,
     // which has to list them.
     const payment = await Payment.findById(id)
@@ -51,8 +58,10 @@ const getPaymentById = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(payment);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching payment details", error });
-    console.log(error);
+    // The error object stays in the log — serialising it to the client leaked
+    // schema paths and model names.
+    console.error("Error fetching payment details:", error);
+    res.status(500).json({ message: "Error fetching payment details" });
   }
 };
 
